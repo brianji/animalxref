@@ -35,26 +35,32 @@ class Chips extends StatelessWidget {
                     items: [
                       PopupMenuItem(
                         value: Sort.name,
-                        child: ListTile(
-                          leading: Icon(Icons.sort_by_alpha),
-                          title: Text('Name'),
-                          dense: true,
+                        child: Row(
+                          children: [
+                            Icon(Icons.sort_by_alpha),
+                            SizedBox(width: 16),
+                            Text('Name'),
+                          ],
                         ),
                       ),
                       PopupMenuItem(
                         value: Sort.bells,
-                        child: ListTile(
-                          leading: Icon(Icons.local_offer),
-                          title: Text('Bells'),
-                          dense: true,
+                        child: Row(
+                          children: [
+                            Icon(Icons.local_offer),
+                            SizedBox(width: 16),
+                            Text('Bells'),
+                          ],
                         ),
                       ),
                       PopupMenuItem(
                         value: Sort.size,
-                        child: ListTile(
-                          leading: Icon(Icons.search),
-                          title: Text('Size'),
-                          dense: true,
+                        child: Row(
+                          children: [
+                            Icon(Icons.search),
+                            SizedBox(width: 16),
+                            Text('Size'),
+                          ],
                         ),
                       ),
                     ],
