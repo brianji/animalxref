@@ -70,14 +70,28 @@ class App extends StatelessWidget {
           },
         ),
       ],
-      child: MaterialApp(
-        title: 'Animal Cross-reference',
-        theme: ThemeData(primarySwatch: Colors.lightGreen),
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.lightGreen,
-        ),
-        home: HomePage(),
+      child: Builder(
+        builder: (_) {
+          final typography = Typography.material2018();
+          final darkTheme = ThemeData.dark();
+          return MaterialApp(
+            title: 'Animal Cross-reference',
+            theme: ThemeData(
+              primarySwatch: Colors.lightGreen,
+              typography: typography,
+            ),
+            darkTheme: darkTheme.copyWith(
+              toggleableActiveColor: Colors.lightGreenAccent[200],
+              accentColor: Colors.lightGreenAccent[200],
+              textSelectionHandleColor: Colors.lightGreenAccent[400],
+              chipTheme: darkTheme.chipTheme.copyWith(
+                selectedColor: Colors.white.withOpacity(0.3),
+              ),
+              typography: typography,
+            ),
+            home: HomePage(),
+          );
+        },
       ),
     );
   }
