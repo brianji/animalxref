@@ -21,7 +21,7 @@ jobs:
           cd build/web
           git init
           git config --global user.email brianji03gmail.com
-          git config --global user.name brianji
+          git config --global user.name "Brian Isganitis"
           git status
           git remote add origin https://${{secrets.flutter_web}}@github.com/brianji/animalxref.git
           git checkout -b gh-pages
