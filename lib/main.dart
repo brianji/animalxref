@@ -72,10 +72,10 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Animal Cross-reference',
-        theme: ThemeData(primarySwatch: Colors.green),
+        theme: ThemeData(primarySwatch: Colors.lightGreen),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
-          primarySwatch: Colors.green,
+          primarySwatch: Colors.lightGreen,
         ),
         home: HomePage(),
       ),
