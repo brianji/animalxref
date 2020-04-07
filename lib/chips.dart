@@ -4,6 +4,10 @@ import 'package:provider/provider.dart';
 import 'filter.dart';
 
 class Chips extends StatelessWidget {
+  final EdgeInsets padding;
+
+  const Chips({Key key, this.padding}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final filter = Provider.of<FilterNotifier>(context);
@@ -13,7 +17,7 @@ class Chips extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16) + padding,
       child: Wrap(
         spacing: 8,
         children: [

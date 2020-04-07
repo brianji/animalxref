@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'fish.dart';
-import 'fish_tile.dart';
+import 'fish_list.dart';
 
 class FishSearchDelegate extends SearchDelegate {
   @override
@@ -32,14 +32,6 @@ class FishSearchDelegate extends SearchDelegate {
       return f.name.toLowerCase().contains(query.trim().toLowerCase());
     }).toList();
 
-    return ListView.separated(
-      itemCount: fishes.length,
-      separatorBuilder: (_, __) => Divider(
-        thickness: 1,
-        indent: 16,
-        endIndent: 16,
-      ),
-      itemBuilder: (_, i) => FishTile(fish: fishes[i]),
-    );
+    return FishList(fishes: fishes);
   }
 }
