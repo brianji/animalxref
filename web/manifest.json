@@ -2,7 +2,7 @@
 	"name": "Animal Cross-reference",
 	"short_name": "Animalxref",
 	"start_url": ".",
-	"display": "minimal-ui",
+	"display": "standalone",
 	"background_color": "#8BC34A",
 	"theme_color": "#8BC34A",
 	"description": "An Animal Crossing New Horizons fish reference web application built with Flutter Web.",
