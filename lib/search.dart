@@ -26,6 +26,7 @@ class _SearchBarState extends State<SearchBar> {
     final textEditingController = Provider.of<TextEditingController>(context);
 
     return Card(
+      elevation: 2.0,
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
         onTap: _focusNode.requestFocus,
