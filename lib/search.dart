@@ -47,7 +47,11 @@ class _SearchBarState extends State<SearchBar> {
               ),
             ),
             if (textEditingController.text.isNotEmpty)
-              CloseButton(onPressed: textEditingController.clear),
+              IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: textEditingController.clear,
+                tooltip: 'Clear',
+              ),
           ],
         ),
       ),
