@@ -47,12 +47,7 @@ class _SearchBarState extends State<SearchBar> {
               ),
             ),
             if (textEditingController.text.isNotEmpty)
-              CloseButton(
-                onPressed: () {
-                  textEditingController.clear();
-                  _focusNode.requestFocus();
-                },
-              ),
+              CloseButton(onPressed: textEditingController.clear),
           ],
         ),
       ),
