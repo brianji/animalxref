@@ -1,37 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'fish.dart';
-import 'fish_list.dart';
-
-class FishSearchDelegate extends SearchDelegate {
+class SearchBar extends StatefulWidget {
   @override
-  ThemeData appBarTheme(BuildContext context) => Theme.of(context);
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  FocusNode _focusNode;
 
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      if (query.isNotEmpty)
-        IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () => query = '',
-          tooltip: 'Clear',
-        ),
-    ];
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
   }
 
   @override
-  Widget buildLeading(BuildContext context) => BackButton();
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
-  Widget buildResults(BuildContext context) => buildSuggestions(context);
+  Widget build(BuildContext context) {
+    final textEditingController = Provider.of<TextEditingController>(context);
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final fishes = Provider.of<List<Fish>>(context).where((f) {
-      return f.name.toLowerCase().contains(query.trim().toLowerCase());
-    }).toList();
-
-    return FishList(fishes: fishes);
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: InkWell(
+        onTap: _focusNode.requestFocus,
+        child: Row(
+          children: [
+            SizedBox(width: 16),
+            Icon(Icons.search),
+            SizedBox(width: 16),
+            Expanded(
+              child: TextField(
+                controller: textEditingController,
+                focusNode: _focusNode,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search fish',
+                ),
+                textInputAction: TextInputAction.search,
+                onSubmitted: (q) => textEditingController.text = q.trim(),
+              ),
+            ),
+            if (textEditingController.text.isNotEmpty)
+              CloseButton(
+                onPressed: () {
+                  textEditingController.clear();
+                  _focusNode.requestFocus();
+                },
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }

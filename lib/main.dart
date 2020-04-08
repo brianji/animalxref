@@ -31,10 +31,23 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<DonateNotifier>(
           create: (_) => DonateNotifier(sharedPreferences),
         ),
-        ProxyProvider3<FilterNotifier, DonateNotifier, List<Fish>, List<Fish>>(
-          update: (context, filter, donate, fish, _) {
+        ChangeNotifierProvider<TextEditingController>(
+          create: (_) => TextEditingController(),
+        ),
+        ProxyProvider<TextEditingController, String>(
+          update: (_, query, __) => query.text.trim(),
+        ),
+        ProxyProvider4<FilterNotifier, DonateNotifier, String, List<Fish>,
+            List<Fish>>(
+          update: (context, filter, donate, query, fish, _) {
             if (fish == null) return [];
             var filtered = List<Fish>.from(fish);
+
+            if (query.isNotEmpty) {
+              filtered = filtered.where((f) {
+                return f.name.toLowerCase().contains(query.toLowerCase());
+              }).toList();
+            }
 
             if (filter.time == Time.now) {
               filtered = filtered.where((f) => f.isAvailable).toList();
