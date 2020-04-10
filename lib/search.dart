@@ -41,7 +41,7 @@ class _SearchBarState extends State<SearchBar> {
                 focusNode: _focusNode,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Search fish',
+                  hintText: 'Search',
                 ),
                 textInputAction: TextInputAction.search,
                 onSubmitted: (q) => textEditingController.text = q.trim(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'critter.dart';
 import 'filter.dart';
 
 class Chips extends StatelessWidget {
@@ -17,6 +18,7 @@ class Chips extends StatelessWidget {
     final sortLabel = filter.sort == Sort.name
         ? 'Name'
         : filter.sort == Sort.bells ? 'Bells' : 'Size';
+    final type = Provider.of<ValueNotifier<CritterType>>(context).value;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -55,16 +57,17 @@ class Chips extends StatelessWidget {
                         ],
                       ),
                     ),
-                    PopupMenuItem(
-                      value: Sort.size,
-                      child: Row(
-                        children: [
-                          Icon(Icons.search),
-                          SizedBox(width: 16),
-                          Text('Size'),
-                        ],
+                    if (type == CritterType.fish)
+                      PopupMenuItem(
+                        value: Sort.size,
+                        child: Row(
+                          children: [
+                            Icon(Icons.search),
+                            SizedBox(width: 16),
+                            Text('Size'),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 );
                 if (value == null) return;
@@ -144,60 +147,90 @@ class Chips extends StatelessWidget {
             selected: filter.donate == Donate.no,
             showCheckmark: false,
           ),
-          Builder(
-            builder: (context) => InputChip(
-              avatar: Icon(Icons.place, size: 18),
-              label: Text(fishLocationText[filter.fishLocation]),
-              selected: filter.fishLocation != FishLocation.any,
-              showCheckmark: false,
-              onPressed: () async {
-                final value = await showMenu<FishLocation>(
-                  context: context,
-                  position: _getMenuPosition(context),
-                  items: fishLocationText.keys.map((l) {
-                    return PopupMenuItem(
-                      value: l,
-                      child: Text(fishLocationText[l]),
-                    );
-                  }).toList(),
-                );
-                if (value == null) return;
-                filter.fishLocation = value;
-              },
-              onDeleted: filter.fishLocation == FishLocation.any
-                  ? null
-                  : () => filter.fishLocation = FishLocation.any,
+          if (type == CritterType.fish) ...[
+            Builder(
+              builder: (context) => InputChip(
+                avatar: Icon(Icons.place, size: 18),
+                label: Text(fishLocationText[filter.fishLocation]),
+                selected: filter.fishLocation != FishLocation.any,
+                showCheckmark: false,
+                onPressed: () async {
+                  final value = await showMenu<FishLocation>(
+                    context: context,
+                    position: _getMenuPosition(context),
+                    items: fishLocationText.keys.map((l) {
+                      return PopupMenuItem(
+                        value: l,
+                        child: Text(fishLocationText[l]),
+                      );
+                    }).toList(),
+                  );
+                  if (value == null) return;
+                  filter.fishLocation = value;
+                },
+                onDeleted: filter.fishLocation == FishLocation.any
+                    ? null
+                    : () => filter.fishLocation = FishLocation.any,
+              ),
             ),
-          ),
-          Builder(
-            builder: (context) => InputChip(
-              avatar: Icon(Icons.search, size: 18),
-              label: Text(fishSizeText[filter.fishSize]),
-              selected: filter.fishSize != FishSize.any,
-              showCheckmark: false,
-              onPressed: () async {
-                final value = await showMenu<FishSize>(
-                  context: context,
-                  position: _getMenuPosition(context),
-                  items: fishSizeText.keys.map((f) {
-                    return PopupMenuItem(
-                      value: f,
-                      child: Text(fishSizeText[f]),
-                    );
-                  }).toList(),
-                );
-                if (value == null) return;
-                filter.fishSize = value;
-              },
-              onDeleted: filter.fishSize == FishSize.any
-                  ? null
-                  : () => filter.fishSize = FishSize.any,
+            Builder(
+              builder: (context) => InputChip(
+                avatar: Icon(Icons.search, size: 18),
+                label: Text(fishSizeText[filter.fishSize]),
+                selected: filter.fishSize != FishSize.any,
+                showCheckmark: false,
+                onPressed: () async {
+                  final value = await showMenu<FishSize>(
+                    context: context,
+                    position: _getMenuPosition(context),
+                    items: fishSizeText.keys.map((f) {
+                      return PopupMenuItem(
+                        value: f,
+                        child: Text(fishSizeText[f]),
+                      );
+                    }).toList(),
+                  );
+                  if (value == null) return;
+                  filter.fishSize = value;
+                },
+                onDeleted: filter.fishSize == FishSize.any
+                    ? null
+                    : () => filter.fishSize = FishSize.any,
+              ),
             ),
-          ),
+          ] else
+            Builder(
+              builder: (context) => InputChip(
+                avatar: Icon(Icons.place, size: 18),
+                label: Text(bugLocationText[filter.bugLocation]),
+                selected: filter.bugLocation != BugLocation.any,
+                showCheckmark: false,
+                onPressed: () async {
+                  final value = await showMenu<BugLocation>(
+                    context: context,
+                    position: _getMenuPosition(context),
+                    items: bugLocationText.keys.map((l) {
+                      return PopupMenuItem(
+                        value: l,
+                        child: Text(bugLocationText[l]),
+                      );
+                    }).toList(),
+                  );
+                  if (value == null) return;
+                  filter.bugLocation = value;
+                },
+                onDeleted: filter.bugLocation == BugLocation.any
+                    ? null
+                    : () => filter.bugLocation = BugLocation.any,
+              ),
+            ),
           if (filter.sort != Sort.name ||
-              filter.fishLocation != FishLocation.any ||
+              (type == CritterType.fish &&
+                  filter.fishLocation != FishLocation.any) ||
+              (type == CritterType.bug &&
+                  filter.bugLocation != BugLocation.any) ||
               filter.time != Time.any ||
-              filter.fishSize != FishSize.any ||
+              (type == CritterType.fish && filter.fishSize != FishSize.any) ||
               filter.donate != Donate.any)
             ButtonTheme(
               minWidth: 56,

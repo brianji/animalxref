@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final inset = max(0, (width - _maxWidth) / 2);
     final padding = EdgeInsets.symmetric(horizontal: inset);
+    final type = Provider.of<ValueNotifier<CritterType>>(context);
     final critters = Provider.of<List<Critter>>(context);
     final count =
         1 + (critters?.length ?? 0) + (critters?.isEmpty == true ? 1 : 0);
@@ -54,8 +55,24 @@ class HomePage extends StatelessWidget {
             );
           }
           return Padding(
-              padding: padding, child: CritterTile(critter: critters[i]));
+            padding: padding,
+            child: CritterTile(critter: critters[i]),
+          );
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: type.value == CritterType.fish ? 0 : 1,
+        onTap: (i) => type.value = i == 0 ? CritterType.fish : CritterType.bug,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.invert_colors),
+            title: Text('Fish'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bug_report),
+            title: Text('Bugs'),
+          ),
+        ],
       ),
     );
   }

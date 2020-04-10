@@ -25,10 +25,11 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider.value(value: sharedPreferences),
-        FutureProvider<List<Critter>>(
-          create: (_) {
-            return CritterService().critters.then((c) => c[CritterType.fish]);
-          },
+        FutureProvider<Map<CritterType, List<Critter>>>(
+          create: (_) => CritterService().critters,
+        ),
+        ChangeNotifierProvider<ValueNotifier<CritterType>>(
+          create: (_) => ValueNotifier(CritterType.fish),
         ),
         StreamProvider<DateTime>(
           initialData: _getNow(),
@@ -54,12 +55,27 @@ class App extends StatelessWidget {
         ProxyProvider<TextEditingController, String>(
           update: (_, query, __) => query.text.trim(),
         ),
-        ProxyProvider5<DateTime, FilterNotifier, PreferencesNotifier, String,
-            List<Critter>, List<Critter>>(
+        ProxyProvider6<
+            DateTime,
+            ValueNotifier<CritterType>,
+            FilterNotifier,
+            PreferencesNotifier,
+            String,
+            Map<CritterType, List<Critter>>,
+            List<Critter>>(
           updateShouldNotify: (a, b) => !listEquals(a, b),
-          update: (context, dateTime, filter, preferences, query, critters, _) {
+          update: (
+            _,
+            dateTime,
+            type,
+            filter,
+            preferences,
+            query,
+            critters,
+            __,
+          ) {
             if (critters == null) return null;
-            var filtered = List<Critter>.from(critters);
+            var filtered = List<Critter>.from(critters[type.value]);
 
             if (query.isNotEmpty) {
               filtered = filtered.where((f) {
@@ -73,7 +89,8 @@ class App extends StatelessWidget {
               }).toList();
             }
 
-            if (filter.fishLocation != FishLocation.any) {
+            if (type.value == CritterType.fish &&
+                filter.fishLocation != FishLocation.any) {
               filtered = filtered.where((f) {
                 return f.location.contains(
                   fishLocationText[filter.fishLocation],
@@ -81,7 +98,16 @@ class App extends StatelessWidget {
               }).toList();
             }
 
-            if (filter.fishSize != FishSize.any) {
+            if (type.value == CritterType.bug &&
+                filter.bugLocation != BugLocation.any) {
+              filtered = filtered.where((f) {
+                return f.location.toLowerCase().contains(
+                    bugLocationText[filter.bugLocation].toLowerCase());
+              }).toList();
+            }
+
+            if (type.value == CritterType.fish &&
+                filter.fishSize != FishSize.any) {
               filtered = filtered.where((f) {
                 return f.size == fishSizeText[filter.fishSize];
               }).toList();
@@ -95,7 +121,8 @@ class App extends StatelessWidget {
 
             if (filter.sort == Sort.bells) {
               filtered.sort((a, b) => b.price.compareTo(a.price));
-            } else if (filter.sort == Sort.size) {
+            } else if (type.value == CritterType.fish &&
+                filter.sort == Sort.size) {
               filtered.sort((a, b) {
                 return fishSizeIndex[b.size].compareTo(fishSizeIndex[a.size]);
               });

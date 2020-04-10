@@ -28,6 +28,40 @@ const fishLocationText = {
   FishLocation.rain: 'Rain',
 };
 
+enum BugLocation {
+  any,
+  beach,
+  flowers,
+  flying,
+  freshWater,
+  ground,
+  rocks,
+  rottenFood,
+  snowballs,
+  stumps,
+  trash,
+  trees,
+  underground,
+  villagers,
+}
+
+const bugLocationText = {
+  BugLocation.any: 'Any',
+  BugLocation.beach: 'Beach',
+  BugLocation.flowers: 'Flowers',
+  BugLocation.flying: 'Flying',
+  BugLocation.freshWater: 'Fresh water',
+  BugLocation.ground: 'Ground',
+  BugLocation.rocks: 'Rocks',
+  BugLocation.rottenFood: 'Rotten food',
+  BugLocation.snowballs: 'Snowballs',
+  BugLocation.stumps: 'Stumps',
+  BugLocation.trash: 'Trash',
+  BugLocation.trees: 'Trees',
+  BugLocation.underground: 'Underground',
+  BugLocation.villagers: 'Villagers',
+};
+
 enum Time {
   any,
   now,
@@ -77,6 +111,7 @@ enum Donate {
 
 class FilterNotifier extends ChangeNotifier {
   FishLocation _fishLocation;
+  BugLocation _bugLocation;
   Sort _sort;
   Time _time;
   DateTime _dateTime;
@@ -85,6 +120,7 @@ class FilterNotifier extends ChangeNotifier {
 
   FilterNotifier() {
     _fishLocation = FishLocation.any;
+    _bugLocation = BugLocation.any;
     _sort = Sort.name;
     _time = Time.any;
     _fishSize = FishSize.any;
@@ -94,6 +130,12 @@ class FilterNotifier extends ChangeNotifier {
   set fishLocation(FishLocation fishLocation) {
     if (fishLocation == _fishLocation) return;
     _fishLocation = fishLocation;
+    notifyListeners();
+  }
+
+  set bugLocation(BugLocation bugLocation) {
+    if (bugLocation == _bugLocation) return;
+    _bugLocation = bugLocation;
     notifyListeners();
   }
 
@@ -130,6 +172,7 @@ class FilterNotifier extends ChangeNotifier {
   }
 
   FishLocation get fishLocation => _fishLocation;
+  BugLocation get bugLocation => _bugLocation;
   Sort get sort => _sort;
   Time get time => _time;
   DateTime get dateTime => _dateTime;
