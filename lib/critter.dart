@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
-class Animal {
+class Critter {
   static final _monthFormat = DateFormat.MMM();
   static final _timeFormat = DateFormat('ha');
 
@@ -15,7 +15,7 @@ class Animal {
   final String north;
   final String south;
 
-  const Animal({
+  const Critter({
     @required this.name,
     @required this.location,
     @required this.price,
@@ -51,7 +51,7 @@ class Animal {
 
   @override
   bool operator ==(other) {
-    return other is Animal &&
+    return other is Critter &&
         other.name == name &&
         other.location == location &&
         other.price == price &&

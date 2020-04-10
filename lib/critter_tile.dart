@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'animal.dart';
+import 'critter.dart';
 import 'preferences.dart';
 
-class AnimalTile extends StatelessWidget {
-  final Animal animal;
+class CritterTile extends StatelessWidget {
+  final Critter critter;
 
-  const AnimalTile({Key key, @required this.animal}) : super(key: key);
+  const CritterTile({Key key, @required this.critter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(animal.name),
+      title: Text(critter.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -21,12 +21,12 @@ class AnimalTile extends StatelessWidget {
             children: [
               Icon(Icons.room, size: 18),
               SizedBox(width: 4),
-              Text(animal.location),
+              Text(critter.location),
               SizedBox(width: 8),
-              if (animal.size != null) ...[
+              if (critter.size != null) ...[
                 Icon(Icons.search, size: 18),
                 SizedBox(width: 4),
-                Text(animal.size),
+                Text(critter.size),
               ],
             ],
           ),
@@ -36,30 +36,30 @@ class AnimalTile extends StatelessWidget {
               SizedBox(width: 4),
               Selector<PreferencesNotifier, bool>(
                 selector: (_, notifier) => notifier.isSouthern,
-                builder: (_, v, __) => Text(v ? animal.south : animal.north),
+                builder: (_, v, __) => Text(v ? critter.south : critter.north),
               ),
               SizedBox(width: 8),
               Icon(Icons.schedule, size: 18),
               SizedBox(width: 4),
-              Flexible(child: FittedBox(child: Text(animal.time))),
+              Flexible(child: FittedBox(child: Text(critter.time))),
             ],
           ),
         ],
       ),
       leading: Consumer<PreferencesNotifier>(
         builder: (context, notifier, _) => Switch(
-          key: ValueKey(animal.name),
-          value: notifier.isDonated(animal.name),
+          key: ValueKey(critter.name),
+          value: notifier.isDonated(critter.name),
           onChanged: (v) {
-            notifier.setDonated(animal.name, v);
+            notifier.setDonated(critter.name, v);
             Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
                 content:
-                    Text('${animal.name} ${v ? 'donated' : 'not donated'}'),
+                    Text('${critter.name} ${v ? 'donated' : 'not donated'}'),
                 action: SnackBarAction(
                   label: 'Undo',
-                  onPressed: () => notifier.setDonated(animal.name, !v),
+                  onPressed: () => notifier.setDonated(critter.name, !v),
                 ),
               ));
           },
@@ -70,7 +70,7 @@ class AnimalTile extends StatelessWidget {
         children: [
           Icon(Icons.local_offer, size: 18),
           SizedBox(width: 4),
-          Text(NumberFormat().format(animal.price)),
+          Text(NumberFormat().format(critter.price)),
         ],
       ),
       isThreeLine: true,

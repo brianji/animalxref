@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'animal.dart';
-import 'animal_tile.dart';
 import 'chips.dart';
+import 'critter.dart';
+import 'critter_tile.dart';
 import 'search.dart';
 
 const _maxWidth = 700;
@@ -16,8 +16,9 @@ class HomePage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final inset = max(0, (width - _maxWidth) / 2);
     final padding = EdgeInsets.symmetric(horizontal: inset);
-    final fishes = Provider.of<List<Animal>>(context);
-    final count = 1 + (fishes?.length ?? 0) + (fishes?.isEmpty == true ? 1 : 0);
+    final critters = Provider.of<List<Critter>>(context);
+    final count =
+        1 + (critters?.length ?? 0) + (critters?.isEmpty == true ? 1 : 0);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
         },
         itemBuilder: (context, i) {
           if (i-- == 0) return Chips(padding: padding);
-          if (fishes?.isEmpty == true) {
+          if (critters?.isEmpty == true) {
             return Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(8),
@@ -53,7 +54,7 @@ class HomePage extends StatelessWidget {
             );
           }
           return Padding(
-              padding: padding, child: AnimalTile(animal: fishes[i]));
+              padding: padding, child: CritterTile(critter: critters[i]));
         },
       ),
     );
