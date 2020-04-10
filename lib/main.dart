@@ -26,7 +26,9 @@ class App extends StatelessWidget {
       providers: [
         Provider.value(value: sharedPreferences),
         FutureProvider<List<Critter>>(
-          create: (_) => CritterService().fish,
+          create: (_) {
+            return CritterService().critters.then((c) => c[CritterType.fish]);
+          },
         ),
         StreamProvider<DateTime>(
           initialData: _getNow(),

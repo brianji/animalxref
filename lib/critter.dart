@@ -3,6 +3,11 @@ import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
+enum CritterType {
+  fish,
+  bug,
+}
+
 class Critter {
   static final _monthFormat = DateFormat.MMM();
   static final _timeFormat = DateFormat('ha');
