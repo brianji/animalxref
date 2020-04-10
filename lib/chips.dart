@@ -25,54 +25,52 @@ class Chips extends StatelessWidget {
         spacing: 8,
         children: [
           Builder(
-            builder: (context) {
-              return InputChip(
-                avatar: Icon(Icons.sort, size: 18),
-                label: Text(sortLabel),
-                selected: filter.sort != Sort.name,
-                showCheckmark: false,
-                onPressed: () async {
-                  final value = await showMenu<Sort>(
-                    context: context,
-                    position: _getMenuPosition(context),
-                    items: [
-                      PopupMenuItem(
-                        value: Sort.name,
-                        child: Row(
-                          children: [
-                            Icon(Icons.sort_by_alpha),
-                            SizedBox(width: 16),
-                            Text('Name'),
-                          ],
-                        ),
+            builder: (context) => InputChip(
+              avatar: Icon(Icons.sort, size: 18),
+              label: Text(sortLabel),
+              selected: filter.sort != Sort.name,
+              showCheckmark: false,
+              onPressed: () async {
+                final value = await showMenu<Sort>(
+                  context: context,
+                  position: _getMenuPosition(context),
+                  items: [
+                    PopupMenuItem(
+                      value: Sort.name,
+                      child: Row(
+                        children: [
+                          Icon(Icons.sort_by_alpha),
+                          SizedBox(width: 16),
+                          Text('Name'),
+                        ],
                       ),
-                      PopupMenuItem(
-                        value: Sort.bells,
-                        child: Row(
-                          children: [
-                            Icon(Icons.local_offer),
-                            SizedBox(width: 16),
-                            Text('Bells'),
-                          ],
-                        ),
+                    ),
+                    PopupMenuItem(
+                      value: Sort.bells,
+                      child: Row(
+                        children: [
+                          Icon(Icons.local_offer),
+                          SizedBox(width: 16),
+                          Text('Bells'),
+                        ],
                       ),
-                      PopupMenuItem(
-                        value: Sort.size,
-                        child: Row(
-                          children: [
-                            Icon(Icons.search),
-                            SizedBox(width: 16),
-                            Text('Size'),
-                          ],
-                        ),
+                    ),
+                    PopupMenuItem(
+                      value: Sort.size,
+                      child: Row(
+                        children: [
+                          Icon(Icons.search),
+                          SizedBox(width: 16),
+                          Text('Size'),
+                        ],
                       ),
-                    ],
-                  );
-                  if (value == null) return;
-                  filter.sort = value;
-                },
-              );
-            },
+                    ),
+                  ],
+                );
+                if (value == null) return;
+                filter.sort = value;
+              },
+            ),
           ),
           Builder(
             builder: (context) => InputChip(
@@ -121,52 +119,48 @@ class Chips extends StatelessWidget {
             showCheckmark: false,
           ),
           Builder(
-            builder: (context) {
-              return InputChip(
-                avatar: Icon(Icons.place, size: 18),
-                label: Text(locationText[filter.location]),
-                selected: filter.location != Location.any,
-                showCheckmark: false,
-                onPressed: () async {
-                  final value = await showMenu<Location>(
-                    context: context,
-                    position: _getMenuPosition(context),
-                    items: locationText.keys.map((l) {
-                      return PopupMenuItem(
-                        value: l,
-                        child: Text(locationText[l]),
-                      );
-                    }).toList(),
-                  );
-                  if (value == null) return;
-                  filter.location = value;
-                },
-              );
-            },
+            builder: (context) => InputChip(
+              avatar: Icon(Icons.place, size: 18),
+              label: Text(locationText[filter.location]),
+              selected: filter.location != Location.any,
+              showCheckmark: false,
+              onPressed: () async {
+                final value = await showMenu<Location>(
+                  context: context,
+                  position: _getMenuPosition(context),
+                  items: locationText.keys.map((l) {
+                    return PopupMenuItem(
+                      value: l,
+                      child: Text(locationText[l]),
+                    );
+                  }).toList(),
+                );
+                if (value == null) return;
+                filter.location = value;
+              },
+            ),
           ),
           Builder(
-            builder: (context) {
-              return InputChip(
-                avatar: Icon(Icons.search, size: 18),
-                label: Text(fishSizeText[filter.fishSize]),
-                selected: filter.fishSize != FishSize.any,
-                showCheckmark: false,
-                onPressed: () async {
-                  final value = await showMenu<FishSize>(
-                    context: context,
-                    position: _getMenuPosition(context),
-                    items: fishSizeText.keys.map((f) {
-                      return PopupMenuItem(
-                        value: f,
-                        child: Text(fishSizeText[f]),
-                      );
-                    }).toList(),
-                  );
-                  if (value == null) return;
-                  filter.fishSize = value;
-                },
-              );
-            },
+            builder: (context) => InputChip(
+              avatar: Icon(Icons.search, size: 18),
+              label: Text(fishSizeText[filter.fishSize]),
+              selected: filter.fishSize != FishSize.any,
+              showCheckmark: false,
+              onPressed: () async {
+                final value = await showMenu<FishSize>(
+                  context: context,
+                  position: _getMenuPosition(context),
+                  items: fishSizeText.keys.map((f) {
+                    return PopupMenuItem(
+                      value: f,
+                      child: Text(fishSizeText[f]),
+                    );
+                  }).toList(),
+                );
+                if (value == null) return;
+                filter.fishSize = value;
+              },
+            ),
           ),
           if (filter.sort != Sort.name ||
               filter.location != Location.any ||
