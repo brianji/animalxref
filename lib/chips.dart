@@ -238,6 +238,7 @@ class Chips extends StatelessWidget {
                 onPressed: () {
                   filter.sort = Sort.name;
                   filter.fishLocation = FishLocation.any;
+                  filter.bugLocation = BugLocation.any;
                   filter.time = Time.any;
                   filter.fishSize = FishSize.any;
                   filter.donate = Donate.any;
