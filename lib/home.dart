@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
     final padding = EdgeInsets.symmetric(horizontal: inset);
     final type = Provider.of<ValueNotifier<CritterType>>(context);
     final critters = Provider.of<List<Critter>>(context);
-    final count = (critters?.length ?? 0) + (critters?.isEmpty == true ? 1 : 0);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -48,11 +47,24 @@ class HomePage extends StatelessWidget {
         child: Builder(
           key: _CrittersKey(critters),
           builder: (context) {
+            if (critters == null) return SizedBox.shrink();
+
+            if (critters.isEmpty) {
+              return Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  'No ${type.value == CritterType.fish ? '🎣' : '🐛'}',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              );
+            }
+
             return ListView.separated(
               padding: MediaQuery.of(context).padding +
                   EdgeInsets.symmetric(vertical: 8) +
                   padding,
-              itemCount: count,
+              itemCount: critters.length,
               separatorBuilder: (_, __) => Divider(
                 thickness: 1,
                 indent: 16,
@@ -60,14 +72,7 @@ class HomePage extends StatelessWidget {
               ),
               itemBuilder: (context, i) {
                 if (critters?.isEmpty == true) {
-                  return Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      'No 🎣',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                  );
+                  return;
                 }
                 return CritterTile(critter: critters[i]);
               },
