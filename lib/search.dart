@@ -27,7 +27,7 @@ class _SearchBarState extends State<SearchBar> {
 
     return Card(
       elevation: 2.0,
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.only(top: 8, left: 16, right: 16),
       child: InkWell(
         onTap: _focusNode.requestFocus,
         child: Row(
