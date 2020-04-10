@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'donate.dart';
 import 'fish.dart';
+import 'preferences.dart';
 
 class FishTile extends StatelessWidget {
   final Fish fish;
@@ -32,7 +32,10 @@ class FishTile extends StatelessWidget {
             children: [
               Icon(Icons.date_range, size: 18),
               SizedBox(width: 4),
-              Text(fish.north),
+              Selector<PreferencesNotifier, bool>(
+                selector: (_, notifier) => notifier.isSouthern,
+                builder: (_, v, __) => Text(v ? fish.south : fish.north),
+              ),
               SizedBox(width: 8),
               Icon(Icons.schedule, size: 18),
               SizedBox(width: 4),
@@ -41,7 +44,7 @@ class FishTile extends StatelessWidget {
           ),
         ],
       ),
-      leading: Consumer<DonateNotifier>(
+      leading: Consumer<PreferencesNotifier>(
         builder: (context, notifier, _) => Switch(
           key: ValueKey(fish.name),
           value: notifier.isDonated(fish.name),

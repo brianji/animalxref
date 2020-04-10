@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'donate.dart';
 import 'filter.dart';
 import 'fish.dart';
 import 'fish_service.dart';
 import 'home.dart';
+import 'preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +22,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider.value(value: sharedPreferences),
         FutureProvider<List<Fish>>(
           create: (_) => FishService().fish,
         ),
@@ -40,8 +41,8 @@ class App extends StatelessWidget {
             return filter.time == Time.now ? now : filter.dateTime;
           },
         ),
-        ChangeNotifierProvider<DonateNotifier>(
-          create: (_) => DonateNotifier(sharedPreferences),
+        ChangeNotifierProvider<PreferencesNotifier>(
+          create: (_) => PreferencesNotifier(sharedPreferences),
         ),
         ChangeNotifierProvider<TextEditingController>(
           create: (_) => TextEditingController(),
@@ -49,9 +50,9 @@ class App extends StatelessWidget {
         ProxyProvider<TextEditingController, String>(
           update: (_, query, __) => query.text.trim(),
         ),
-        ProxyProvider5<DateTime, FilterNotifier, DonateNotifier, String,
+        ProxyProvider5<DateTime, FilterNotifier, PreferencesNotifier, String,
             List<Fish>, List<Fish>>(
-          update: (context, dateTime, filter, donate, query, fish, _) {
+          update: (context, dateTime, filter, preferences, query, fish, _) {
             if (fish == null) return null;
             var filtered = List<Fish>.from(fish);
 
@@ -63,7 +64,7 @@ class App extends StatelessWidget {
 
             if (filter.time != Time.any && dateTime != null) {
               filtered = filtered.where((f) {
-                return f.isAvailable(dateTime);
+                return f.isAvailable(dateTime, preferences.isSouthern);
               }).toList();
             }
 
@@ -81,7 +82,7 @@ class App extends StatelessWidget {
 
             if (filter.donate != Donate.any) {
               filtered = filtered.where((f) {
-                return !donate.isDonated(f.name);
+                return !preferences.isDonated(f.name);
               }).toList();
             }
 

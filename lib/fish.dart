@@ -23,10 +23,10 @@ class Fish {
     @required this.size,
   });
 
-  bool isAvailable(DateTime dateTime) {
+  bool isAvailable(DateTime dateTime, bool isSouthern) {
     final month = dateTime.month;
     final hour = dateTime.hour;
-    final months = north.split(', ');
+    final months = (isSouthern ? south : north).split(', ');
     final times = time.split(', ');
 
     return months.any((m) {

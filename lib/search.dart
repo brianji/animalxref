@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'settings.dart';
+
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -58,6 +60,16 @@ class _SearchBarState extends State<SearchBar> {
                 PopupMenuItem(
                   child: Row(
                     children: [
+                      Icon(Icons.settings),
+                      SizedBox(width: 16),
+                      Text('Settings'),
+                    ],
+                  ),
+                  value: _Item.settings,
+                ),
+                PopupMenuItem(
+                  child: Row(
+                    children: [
                       Icon(Icons.info_outline),
                       SizedBox(width: 16),
                       Text('About'),
@@ -68,6 +80,13 @@ class _SearchBarState extends State<SearchBar> {
               ],
               onSelected: (v) {
                 switch (v) {
+                  case _Item.settings:
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return SettingsPage();
+                      }),
+                    );
+                    break;
                   case _Item.about:
                     showAboutDialog(context: context);
                     return;
@@ -82,5 +101,6 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 enum _Item {
+  settings,
   about,
 }
