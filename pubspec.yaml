@@ -17,4 +17,5 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/bugs.json
     - assets/fish.json
