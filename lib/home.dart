@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
             if (critters.isEmpty) {
               return Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(16),
+                padding: MediaQuery.of(context).padding + EdgeInsets.all(16),
                 child: Text(
                   'No ${type.value == CritterType.fish ? '🎣' : '🐛'}',
                   style: Theme.of(context).textTheme.headline4,
