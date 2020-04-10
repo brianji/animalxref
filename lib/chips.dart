@@ -82,8 +82,29 @@ class Chips extends StatelessWidget {
                   : _dateFormat.format(filter.dateTime)),
               avatar: Icon(Icons.schedule, size: 18),
               onPressed: () async {
-                final now = DateTime.now().toLocal();
+                final value = await showMenu<_Time>(
+                  context: context,
+                  position: _getMenuPosition(context),
+                  items: [
+                    PopupMenuItem(child: Text('Any'), value: _Time.any),
+                    PopupMenuItem(child: Text('Now'), value: _Time.now),
+                    PopupMenuItem(child: Text('Custom'), value: _Time.custom),
+                  ],
+                );
+                if (value == null) return;
 
+                switch (value) {
+                  case _Time.any:
+                    filter.dateTime = null;
+                    return;
+                  case _Time.now:
+                    filter.dateTime = DateTime.now().toLocal();
+                    return;
+                  case _Time.custom:
+                    break;
+                }
+
+                final now = DateTime.now().toLocal();
                 final date = await showDatePicker(
                   context: context,
                   initialDate: now,
@@ -224,4 +245,10 @@ class Chips extends StatelessWidget {
       Offset.zero & overlay.size,
     );
   }
+}
+
+enum _Time {
+  any,
+  now,
+  custom,
 }
