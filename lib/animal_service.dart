@@ -6,7 +6,7 @@ import 'animal.dart';
 
 const _fishFile = 'assets/fish.json';
 
-class FishService {
+class AnimalService {
   Future<List<Animal>> get fish async {
     final contents = await rootBundle.loadString(_fishFile);
     final List json = jsonDecode(contents);

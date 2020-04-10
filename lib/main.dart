@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'animal.dart';
+import 'animal_service.dart';
 import 'filter.dart';
-import 'fish_service.dart';
 import 'home.dart';
 import 'preferences.dart';
 import 'settings.dart';
@@ -26,7 +26,7 @@ class App extends StatelessWidget {
       providers: [
         Provider.value(value: sharedPreferences),
         FutureProvider<List<Animal>>(
-          create: (_) => FishService().fish,
+          create: (_) => AnimalService().fish,
         ),
         StreamProvider<DateTime>(
           initialData: _getNow(),
