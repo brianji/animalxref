@@ -105,11 +105,17 @@ class App extends StatelessWidget {
         builder: (_) {
           final typography = Typography.material2018();
           final darkTheme = ThemeData.dark();
+          final pageTransitionsTheme = PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: ZoomPageTransitionsBuilder(),
+            },
+          );
           return MaterialApp(
             title: 'Animal Cross-reference',
             theme: ThemeData(
               primarySwatch: Colors.lightGreen,
               typography: typography,
+              pageTransitionsTheme: pageTransitionsTheme,
             ),
             darkTheme: darkTheme.copyWith(
               toggleableActiveColor: Colors.lightGreenAccent[200],
@@ -119,6 +125,7 @@ class App extends StatelessWidget {
                 selectedColor: Colors.white.withOpacity(0.3),
               ),
               typography: typography,
+              pageTransitionsTheme: pageTransitionsTheme,
             ),
             initialRoute: '/',
             routes: {
