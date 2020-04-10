@@ -17,6 +17,7 @@ class HomePage extends StatelessWidget {
     final inset = max(0, (width - _maxWidth) / 2);
     final padding = EdgeInsets.symmetric(horizontal: inset);
     final fishes = Provider.of<List<Fish>>(context);
+    final count = 1 + (fishes?.length ?? 0) + (fishes?.isEmpty == true ? 1 : 0);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -30,7 +31,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: ListView.separated(
-        itemCount: fishes.length + 1,
+        itemCount: count,
         separatorBuilder: (_, i) {
           if (i == 0) return SizedBox.shrink();
           return Divider(
@@ -39,8 +40,18 @@ class HomePage extends StatelessWidget {
             endIndent: 16 + inset,
           );
         },
-        itemBuilder: (_, i) {
+        itemBuilder: (context, i) {
           if (i-- == 0) return Chips(padding: padding);
+          if (fishes?.isEmpty == true) {
+            return Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(8),
+              child: Text(
+                'No 🎣',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            );
+          }
           return Padding(padding: padding, child: FishTile(fish: fishes[i]));
         },
       ),

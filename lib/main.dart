@@ -40,7 +40,7 @@ class App extends StatelessWidget {
         ProxyProvider4<FilterNotifier, DonateNotifier, String, List<Fish>,
             List<Fish>>(
           update: (context, filter, donate, query, fish, _) {
-            if (fish == null) return [];
+            if (fish == null) return null;
             var filtered = List<Fish>.from(fish);
 
             if (query.isNotEmpty) {
