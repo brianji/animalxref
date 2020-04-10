@@ -70,12 +70,7 @@ class HomePage extends StatelessWidget {
                 indent: 16,
                 endIndent: 16,
               ),
-              itemBuilder: (context, i) {
-                if (critters?.isEmpty == true) {
-                  return;
-                }
-                return CritterTile(critter: critters[i]);
-              },
+              itemBuilder: (_, i) => CritterTile(critter: critters[i]),
             );
           },
         ),
