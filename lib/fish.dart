@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -45,5 +47,22 @@ class Fish {
           return (start <= end && hour >= start && hour < end) ||
               (start > end && (hour < end || hour >= start));
         });
+  }
+
+  @override
+  bool operator ==(other) {
+    return other is Fish &&
+        other.name == name &&
+        other.location == location &&
+        other.price == price &&
+        other.time == time &&
+        other.north == north &&
+        other.south == south &&
+        other.size == size;
+  }
+
+  @override
+  int get hashCode {
+    return hashValues(name, location, price, time, north, south, size);
   }
 }

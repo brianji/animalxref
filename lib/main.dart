@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,6 +54,7 @@ class App extends StatelessWidget {
         ),
         ProxyProvider5<DateTime, FilterNotifier, PreferencesNotifier, String,
             List<Fish>, List<Fish>>(
+          updateShouldNotify: (a, b) => !listEquals(a, b),
           update: (context, dateTime, filter, preferences, query, fish, _) {
             if (fish == null) return null;
             var filtered = List<Fish>.from(fish);
