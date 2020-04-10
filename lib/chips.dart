@@ -270,7 +270,7 @@ class Chips extends StatelessWidget {
     return RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(
-          Offset.zero,
+          Offset(0, 8),
           ancestor: overlay,
         ),
         button.localToGlobal(
