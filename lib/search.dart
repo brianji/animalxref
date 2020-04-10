@@ -53,9 +53,34 @@ class _SearchBarState extends State<SearchBar> {
                 onPressed: textEditingController.clear,
                 tooltip: 'Clear',
               ),
+            PopupMenuButton<_Item>(
+              itemBuilder: (_) => [
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Icon(Icons.info_outline),
+                      SizedBox(width: 16),
+                      Text('About'),
+                    ],
+                  ),
+                  value: _Item.about,
+                ),
+              ],
+              onSelected: (v) {
+                switch (v) {
+                  case _Item.about:
+                    showAboutDialog(context: context);
+                    return;
+                }
+              },
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+enum _Item {
+  about,
 }
