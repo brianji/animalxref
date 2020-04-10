@@ -22,7 +22,7 @@ class Animal {
     @required this.time,
     @required this.north,
     @required this.south,
-    @required this.size,
+    this.size,
   });
 
   bool isAvailable(DateTime dateTime, bool isSouthern) {

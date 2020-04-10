@@ -23,9 +23,11 @@ class AnimalTile extends StatelessWidget {
               SizedBox(width: 4),
               Text(animal.location),
               SizedBox(width: 8),
-              Icon(Icons.search, size: 18),
-              SizedBox(width: 4),
-              Text(animal.size),
+              if (animal.size != null) ...[
+                Icon(Icons.search, size: 18),
+                SizedBox(width: 4),
+                Text(animal.size),
+              ],
             ],
           ),
           Row(
