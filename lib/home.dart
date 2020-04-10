@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'animal.dart';
+import 'animal_tile.dart';
 import 'chips.dart';
-import 'fish_tile.dart';
 import 'search.dart';
 
 const _maxWidth = 700;
@@ -52,7 +52,8 @@ class HomePage extends StatelessWidget {
               ),
             );
           }
-          return Padding(padding: padding, child: FishTile(fish: fishes[i]));
+          return Padding(
+              padding: padding, child: AnimalTile(animal: fishes[i]));
         },
       ),
     );

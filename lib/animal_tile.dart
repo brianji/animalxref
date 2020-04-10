@@ -5,15 +5,15 @@ import 'package:provider/provider.dart';
 import 'animal.dart';
 import 'preferences.dart';
 
-class FishTile extends StatelessWidget {
-  final Animal fish;
+class AnimalTile extends StatelessWidget {
+  final Animal animal;
 
-  const FishTile({Key key, @required this.fish}) : super(key: key);
+  const AnimalTile({Key key, @required this.animal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(fish.name),
+      title: Text(animal.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -21,11 +21,11 @@ class FishTile extends StatelessWidget {
             children: [
               Icon(Icons.room, size: 18),
               SizedBox(width: 4),
-              Text(fish.location),
+              Text(animal.location),
               SizedBox(width: 8),
               Icon(Icons.search, size: 18),
               SizedBox(width: 4),
-              Text(fish.size),
+              Text(animal.size),
             ],
           ),
           Row(
@@ -34,29 +34,30 @@ class FishTile extends StatelessWidget {
               SizedBox(width: 4),
               Selector<PreferencesNotifier, bool>(
                 selector: (_, notifier) => notifier.isSouthern,
-                builder: (_, v, __) => Text(v ? fish.south : fish.north),
+                builder: (_, v, __) => Text(v ? animal.south : animal.north),
               ),
               SizedBox(width: 8),
               Icon(Icons.schedule, size: 18),
               SizedBox(width: 4),
-              Flexible(child: FittedBox(child: Text(fish.time))),
+              Flexible(child: FittedBox(child: Text(animal.time))),
             ],
           ),
         ],
       ),
       leading: Consumer<PreferencesNotifier>(
         builder: (context, notifier, _) => Switch(
-          key: ValueKey(fish.name),
-          value: notifier.isDonated(fish.name),
+          key: ValueKey(animal.name),
+          value: notifier.isDonated(animal.name),
           onChanged: (v) {
-            notifier.setDonated(fish.name, v);
+            notifier.setDonated(animal.name, v);
             Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
-                content: Text('${fish.name} ${v ? 'donated' : 'not donated'}'),
+                content:
+                    Text('${animal.name} ${v ? 'donated' : 'not donated'}'),
                 action: SnackBarAction(
                   label: 'Undo',
-                  onPressed: () => notifier.setDonated(fish.name, !v),
+                  onPressed: () => notifier.setDonated(animal.name, !v),
                 ),
               ));
           },
@@ -67,7 +68,7 @@ class FishTile extends StatelessWidget {
         children: [
           Icon(Icons.local_offer, size: 18),
           SizedBox(width: 4),
-          Text(NumberFormat().format(fish.price)),
+          Text(NumberFormat().format(animal.price)),
         ],
       ),
       isThreeLine: true,
