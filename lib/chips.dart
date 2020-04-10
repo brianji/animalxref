@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'filter.dart';
 
 class Chips extends StatelessWidget {
+  static final _dateFormat = DateFormat.Md().add_jm();
+
   final EdgeInsets padding;
 
   const Chips({Key key, this.padding}) : super(key: key);
@@ -71,12 +74,44 @@ class Chips extends StatelessWidget {
               );
             },
           ),
-          FilterChip(
-            label: Text('Now'),
-            avatar: Icon(Icons.schedule, size: 18),
-            onSelected: (v) => filter.time = v ? Time.now : Time.any,
-            selected: filter.time == Time.now,
-            showCheckmark: false,
+          Builder(
+            builder: (context) => InputChip(
+              label: Text(filter.dateTime == null
+                  ? 'Any'
+                  : _dateFormat.format(filter.dateTime)),
+              avatar: Icon(Icons.schedule, size: 18),
+              onPressed: () async {
+                final now = DateTime.now().toLocal();
+
+                final date = await showDatePicker(
+                  context: context,
+                  initialDate: now,
+                  firstDate: now,
+                  lastDate: DateTime(now.year + 1, now.month, now.day),
+                  builder: _buildPicker,
+                );
+                if (date == null) return;
+
+                final time = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                  builder: _buildPicker,
+                );
+                if (time == null) return;
+
+                filter.dateTime = DateTime(
+                  date.year,
+                  date.month,
+                  date.day,
+                  time.hour,
+                  time.minute,
+                );
+              },
+              onDeleted:
+                  filter.dateTime == null ? null : () => filter.dateTime = null,
+              selected: filter.dateTime != null,
+              showCheckmark: false,
+            ),
           ),
           FilterChip(
             label: Text('Donate'),
@@ -135,7 +170,7 @@ class Chips extends StatelessWidget {
           ),
           if (filter.sort != Sort.name ||
               filter.location != Location.any ||
-              filter.time != Time.any ||
+              filter.dateTime != null ||
               filter.fishSize != FishSize.any ||
               filter.donate != Donate.any)
             ButtonTheme(
@@ -144,7 +179,7 @@ class Chips extends StatelessWidget {
                 onPressed: () {
                   filter.sort = Sort.name;
                   filter.location = Location.any;
-                  filter.time = Time.any;
+                  filter.dateTime = null;
                   filter.fishSize = FishSize.any;
                   filter.donate = Donate.any;
                 },
@@ -153,6 +188,18 @@ class Chips extends StatelessWidget {
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPicker(BuildContext context, Widget child) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 500,
+          maxHeight: 500,
+        ),
+        child: child,
       ),
     );
   }

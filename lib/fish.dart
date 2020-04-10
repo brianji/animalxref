@@ -23,10 +23,9 @@ class Fish {
     @required this.size,
   });
 
-  bool get isAvailable {
-    final now = DateTime.now().toLocal();
-    final month = now.month;
-    final hour = now.hour;
+  bool isAvailable(DateTime dateTime) {
+    final month = dateTime.month;
+    final hour = dateTime.hour;
     final months = north.split(', ');
     final times = time.split(', ');
 

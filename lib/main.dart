@@ -49,8 +49,10 @@ class App extends StatelessWidget {
               }).toList();
             }
 
-            if (filter.time == Time.now) {
-              filtered = filtered.where((f) => f.isAvailable).toList();
+            if (filter.dateTime != null) {
+              filtered = filtered.where((f) {
+                return f.isAvailable(filter.dateTime);
+              }).toList();
             }
 
             if (filter.location != Location.any) {
