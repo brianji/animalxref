@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'settings.dart';
-
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -81,12 +79,8 @@ class _SearchBarState extends State<SearchBar> {
               onSelected: (v) {
                 switch (v) {
                   case _Item.settings:
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) {
-                        return SettingsPage();
-                      }),
-                    );
-                    break;
+                    Navigator.of(context).pushNamed('/settings');
+                    return;
                   case _Item.about:
                     showAboutDialog(context: context);
                     return;

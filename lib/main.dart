@@ -7,6 +7,7 @@ import 'fish.dart';
 import 'fish_service.dart';
 import 'home.dart';
 import 'preferences.dart';
+import 'settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -117,7 +118,11 @@ class App extends StatelessWidget {
               ),
               typography: typography,
             ),
-            home: HomePage(),
+            initialRoute: '/',
+            routes: {
+              '/': (_) => HomePage(),
+              '/settings': (_) => SettingsPage(),
+            },
           );
         },
       ),
