@@ -218,7 +218,7 @@ class Chips extends StatelessWidget {
     );
   }
 
-  Widget _buildPicker(BuildContext context, Widget child) {
+  static Widget _buildPicker(BuildContext context, Widget child) {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -230,7 +230,7 @@ class Chips extends StatelessWidget {
     );
   }
 
-  RelativeRect _getMenuPosition(BuildContext context) {
+  static RelativeRect _getMenuPosition(BuildContext context) {
     final button = context.findRenderObject() as RenderBox;
     final overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     return RelativeRect.fromRect(
