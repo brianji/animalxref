@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'animal.dart';
 import 'filter.dart';
-import 'fish.dart';
 import 'fish_service.dart';
 import 'home.dart';
 import 'preferences.dart';
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider.value(value: sharedPreferences),
-        FutureProvider<List<Fish>>(
+        FutureProvider<List<Animal>>(
           create: (_) => FishService().fish,
         ),
         StreamProvider<DateTime>(
@@ -53,11 +53,11 @@ class App extends StatelessWidget {
           update: (_, query, __) => query.text.trim(),
         ),
         ProxyProvider5<DateTime, FilterNotifier, PreferencesNotifier, String,
-            List<Fish>, List<Fish>>(
+            List<Animal>, List<Animal>>(
           updateShouldNotify: (a, b) => !listEquals(a, b),
           update: (context, dateTime, filter, preferences, query, fish, _) {
             if (fish == null) return null;
-            var filtered = List<Fish>.from(fish);
+            var filtered = List<Animal>.from(fish);
 
             if (query.isNotEmpty) {
               filtered = filtered.where((f) {

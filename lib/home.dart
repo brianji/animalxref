@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'animal.dart';
 import 'chips.dart';
-import 'fish.dart';
 import 'fish_tile.dart';
 import 'search.dart';
 
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final inset = max(0, (width - _maxWidth) / 2);
     final padding = EdgeInsets.symmetric(horizontal: inset);
-    final fishes = Provider.of<List<Fish>>(context);
+    final fishes = Provider.of<List<Animal>>(context);
     final count = 1 + (fishes?.length ?? 0) + (fishes?.isEmpty == true ? 1 : 0);
 
     return Scaffold(

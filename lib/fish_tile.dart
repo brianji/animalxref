@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'fish.dart';
+import 'animal.dart';
 import 'preferences.dart';
 
 class FishTile extends StatelessWidget {
-  final Fish fish;
+  final Animal fish;
 
   const FishTile({Key key, @required this.fish}) : super(key: key);
 

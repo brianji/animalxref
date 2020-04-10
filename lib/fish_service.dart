@@ -2,16 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'fish.dart';
+import 'animal.dart';
 
 const _fishFile = 'assets/fish.json';
 
 class FishService {
-  Future<List<Fish>> get fish async {
+  Future<List<Animal>> get fish async {
     final contents = await rootBundle.loadString(_fishFile);
     final List json = jsonDecode(contents);
     return json.map((j) {
-      return Fish(
+      return Animal(
         name: j['Name'],
         location: j['Location'],
         size: j['Size'],
