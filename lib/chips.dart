@@ -70,6 +70,9 @@ class Chips extends StatelessWidget {
                 if (value == null) return;
                 filter.sort = value;
               },
+              onDeleted: filter.sort == Sort.name
+                  ? null
+                  : () => filter.sort = Sort.name,
             ),
           ),
           Builder(
@@ -138,6 +141,9 @@ class Chips extends StatelessWidget {
                 if (value == null) return;
                 filter.location = value;
               },
+              onDeleted: filter.location == Location.any
+                  ? null
+                  : () => filter.location = Location.any,
             ),
           ),
           Builder(
@@ -160,6 +166,9 @@ class Chips extends StatelessWidget {
                 if (value == null) return;
                 filter.fishSize = value;
               },
+              onDeleted: filter.fishSize == FishSize.any
+                  ? null
+                  : () => filter.fishSize = FishSize.any,
             ),
           ),
           if (filter.sort != Sort.name ||
