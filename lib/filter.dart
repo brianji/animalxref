@@ -6,7 +6,7 @@ enum Sort {
   size,
 }
 
-enum Location {
+enum FishLocation {
   any,
   river,
   pond,
@@ -17,15 +17,15 @@ enum Location {
   rain,
 }
 
-const locationText = {
-  Location.any: 'Any',
-  Location.river: 'River',
-  Location.pond: 'Pond',
-  Location.clifftop: 'Clifftop',
-  Location.mouth: 'Mouth',
-  Location.sea: 'Sea',
-  Location.pier: 'Pier',
-  Location.rain: 'Rain',
+const fishLocationText = {
+  FishLocation.any: 'Any',
+  FishLocation.river: 'River',
+  FishLocation.pond: 'Pond',
+  FishLocation.clifftop: 'Clifftop',
+  FishLocation.mouth: 'Mouth',
+  FishLocation.sea: 'Sea',
+  FishLocation.pier: 'Pier',
+  FishLocation.rain: 'Rain',
 };
 
 enum Time {
@@ -76,7 +76,7 @@ enum Donate {
 }
 
 class FilterNotifier extends ChangeNotifier {
-  Location _location;
+  FishLocation _fishLocation;
   Sort _sort;
   Time _time;
   DateTime _dateTime;
@@ -84,16 +84,16 @@ class FilterNotifier extends ChangeNotifier {
   Donate _donate;
 
   FilterNotifier() {
-    _location = Location.any;
+    _fishLocation = FishLocation.any;
     _sort = Sort.name;
     _time = Time.any;
     _fishSize = FishSize.any;
     _donate = Donate.any;
   }
 
-  set location(Location location) {
-    if (location == _location) return;
-    _location = location;
+  set fishLocation(FishLocation fishLocation) {
+    if (fishLocation == _fishLocation) return;
+    _fishLocation = fishLocation;
     notifyListeners();
   }
 
@@ -129,7 +129,7 @@ class FilterNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Location get location => _location;
+  FishLocation get fishLocation => _fishLocation;
   Sort get sort => _sort;
   Time get time => _time;
   DateTime get dateTime => _dateTime;

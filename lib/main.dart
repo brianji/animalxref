@@ -73,9 +73,11 @@ class App extends StatelessWidget {
               }).toList();
             }
 
-            if (filter.location != Location.any) {
+            if (filter.fishLocation != FishLocation.any) {
               filtered = filtered.where((f) {
-                return f.location.contains(locationText[filter.location]);
+                return f.location.contains(
+                  fishLocationText[filter.fishLocation],
+                );
               }).toList();
             }
 

@@ -147,26 +147,26 @@ class Chips extends StatelessWidget {
           Builder(
             builder: (context) => InputChip(
               avatar: Icon(Icons.place, size: 18),
-              label: Text(locationText[filter.location]),
-              selected: filter.location != Location.any,
+              label: Text(fishLocationText[filter.fishLocation]),
+              selected: filter.fishLocation != FishLocation.any,
               showCheckmark: false,
               onPressed: () async {
-                final value = await showMenu<Location>(
+                final value = await showMenu<FishLocation>(
                   context: context,
                   position: _getMenuPosition(context),
-                  items: locationText.keys.map((l) {
+                  items: fishLocationText.keys.map((l) {
                     return PopupMenuItem(
                       value: l,
-                      child: Text(locationText[l]),
+                      child: Text(fishLocationText[l]),
                     );
                   }).toList(),
                 );
                 if (value == null) return;
-                filter.location = value;
+                filter.fishLocation = value;
               },
-              onDeleted: filter.location == Location.any
+              onDeleted: filter.fishLocation == FishLocation.any
                   ? null
-                  : () => filter.location = Location.any,
+                  : () => filter.fishLocation = FishLocation.any,
             ),
           ),
           Builder(
@@ -195,7 +195,7 @@ class Chips extends StatelessWidget {
             ),
           ),
           if (filter.sort != Sort.name ||
-              filter.location != Location.any ||
+              filter.fishLocation != FishLocation.any ||
               filter.time != Time.any ||
               filter.fishSize != FishSize.any ||
               filter.donate != Donate.any)
@@ -204,7 +204,7 @@ class Chips extends StatelessWidget {
               child: FlatButton(
                 onPressed: () {
                   filter.sort = Sort.name;
-                  filter.location = Location.any;
+                  filter.fishLocation = FishLocation.any;
                   filter.time = Time.any;
                   filter.fishSize = FishSize.any;
                   filter.donate = Donate.any;
