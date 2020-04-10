@@ -25,8 +25,20 @@ class App extends StatelessWidget {
         FutureProvider<List<Fish>>(
           create: (_) => FishService().fish,
         ),
+        StreamProvider<DateTime>(
+          initialData: _getNow(),
+          create: (_) => Stream.periodic(
+            Duration(minutes: 1),
+            (_) => _getNow(),
+          ),
+        ),
         ChangeNotifierProvider<FilterNotifier>(
           create: (_) => FilterNotifier(),
+        ),
+        ProxyProvider2<DateTime, FilterNotifier, DateTime>(
+          update: (_, now, filter, __) {
+            return filter.time == Time.now ? now : filter.dateTime;
+          },
         ),
         ChangeNotifierProvider<DonateNotifier>(
           create: (_) => DonateNotifier(sharedPreferences),
@@ -37,9 +49,9 @@ class App extends StatelessWidget {
         ProxyProvider<TextEditingController, String>(
           update: (_, query, __) => query.text.trim(),
         ),
-        ProxyProvider4<FilterNotifier, DonateNotifier, String, List<Fish>,
-            List<Fish>>(
-          update: (context, filter, donate, query, fish, _) {
+        ProxyProvider5<DateTime, FilterNotifier, DonateNotifier, String,
+            List<Fish>, List<Fish>>(
+          update: (context, dateTime, filter, donate, query, fish, _) {
             if (fish == null) return null;
             var filtered = List<Fish>.from(fish);
 
@@ -49,9 +61,9 @@ class App extends StatelessWidget {
               }).toList();
             }
 
-            if (filter.dateTime != null) {
+            if (filter.time != Time.any && dateTime != null) {
               filtered = filtered.where((f) {
-                return f.isAvailable(filter.dateTime);
+                return f.isAvailable(dateTime);
               }).toList();
             }
 
@@ -109,5 +121,10 @@ class App extends StatelessWidget {
         },
       ),
     );
+  }
+
+  static DateTime _getNow() {
+    final now = DateTime.now().toLocal();
+    return DateTime(now.year, now.month, now.day, now.hour);
   }
 }

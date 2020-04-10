@@ -28,6 +28,12 @@ const locationText = {
   Location.rain: 'Rain',
 };
 
+enum Time {
+  any,
+  now,
+  custom,
+}
+
 enum FishSize {
   any,
   smallest,
@@ -72,6 +78,7 @@ enum Donate {
 class FilterNotifier extends ChangeNotifier {
   Location _location;
   Sort _sort;
+  Time _time;
   DateTime _dateTime;
   FishSize _fishSize;
   Donate _donate;
@@ -79,6 +86,7 @@ class FilterNotifier extends ChangeNotifier {
   FilterNotifier() {
     _location = Location.any;
     _sort = Sort.name;
+    _time = Time.any;
     _fishSize = FishSize.any;
     _donate = Donate.any;
   }
@@ -95,9 +103,17 @@ class FilterNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  set time(Time time) {
+    if (time == _time) return;
+    _time = time;
+    _dateTime = null;
+    notifyListeners();
+  }
+
   set dateTime(DateTime dateTime) {
     if (dateTime == _dateTime) return;
     _dateTime = dateTime;
+    _time = Time.custom;
     notifyListeners();
   }
 
@@ -115,6 +131,7 @@ class FilterNotifier extends ChangeNotifier {
 
   Location get location => _location;
   Sort get sort => _sort;
+  Time get time => _time;
   DateTime get dateTime => _dateTime;
   FishSize get fishSize => _fishSize;
   Donate get donate => _donate;

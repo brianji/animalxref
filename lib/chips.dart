@@ -77,30 +77,32 @@ class Chips extends StatelessWidget {
           ),
           Builder(
             builder: (context) => InputChip(
-              label: Text(filter.dateTime == null
+              label: Text(filter.time == Time.any
                   ? 'Any'
-                  : _dateFormat.format(filter.dateTime)),
+                  : filter.time == Time.now
+                      ? 'Now'
+                      : _dateFormat.format(filter.dateTime)),
               avatar: Icon(Icons.schedule, size: 18),
               onPressed: () async {
-                final value = await showMenu<_Time>(
+                final value = await showMenu<Time>(
                   context: context,
                   position: _getMenuPosition(context),
                   items: [
-                    PopupMenuItem(child: Text('Any'), value: _Time.any),
-                    PopupMenuItem(child: Text('Now'), value: _Time.now),
-                    PopupMenuItem(child: Text('Custom'), value: _Time.custom),
+                    PopupMenuItem(child: Text('Any'), value: Time.any),
+                    PopupMenuItem(child: Text('Now'), value: Time.now),
+                    PopupMenuItem(child: Text('Custom'), value: Time.custom),
                   ],
                 );
                 if (value == null) return;
 
                 switch (value) {
-                  case _Time.any:
-                    filter.dateTime = null;
+                  case Time.any:
+                    filter.time = Time.any;
                     return;
-                  case _Time.now:
-                    filter.dateTime = DateTime.now().toLocal();
+                  case Time.now:
+                    filter.time = Time.now;
                     return;
-                  case _Time.custom:
+                  case Time.custom:
                     break;
                 }
 
@@ -130,8 +132,8 @@ class Chips extends StatelessWidget {
                 );
               },
               onDeleted:
-                  filter.dateTime == null ? null : () => filter.dateTime = null,
-              selected: filter.dateTime != null,
+                  filter.time == Time.any ? null : () => filter.time = Time.any,
+              selected: filter.time != Time.any,
               showCheckmark: false,
             ),
           ),
@@ -194,7 +196,7 @@ class Chips extends StatelessWidget {
           ),
           if (filter.sort != Sort.name ||
               filter.location != Location.any ||
-              filter.dateTime != null ||
+              filter.time != Time.any ||
               filter.fishSize != FishSize.any ||
               filter.donate != Donate.any)
             ButtonTheme(
@@ -203,7 +205,7 @@ class Chips extends StatelessWidget {
                 onPressed: () {
                   filter.sort = Sort.name;
                   filter.location = Location.any;
-                  filter.dateTime = null;
+                  filter.time = Time.any;
                   filter.fishSize = FishSize.any;
                   filter.donate = Donate.any;
                 },
@@ -245,10 +247,4 @@ class Chips extends StatelessWidget {
       Offset.zero & overlay.size,
     );
   }
-}
-
-enum _Time {
-  any,
-  now,
-  custom,
 }
