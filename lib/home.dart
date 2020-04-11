@@ -23,10 +23,12 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight + 48),
         child: Material(
-          elevation: 2.0,
+          color: Theme.of(context).canvasColor.withOpacity(0.95),
+          elevation: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -76,6 +78,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).bottomAppBarColor.withOpacity(0.95),
         currentIndex: type.value == CritterType.fish ? 0 : 1,
         onTap: (i) => type.value = i == 0 ? CritterType.fish : CritterType.bug,
         items: [
