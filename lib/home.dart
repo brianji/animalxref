@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
         preferredSize: Size.fromHeight(kToolbarHeight + 48),
         child: Material(
           color: Theme.of(context).canvasColor.withOpacity(0.97),
-          elevation: 2,
+          elevation: 1,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
