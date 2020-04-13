@@ -46,14 +46,15 @@ class Critter {
           return (start <= end && month >= start && month <= end) ||
               (start > end && (month <= end || month >= start));
         }) &&
-        times.any((t) {
-          if (t == 'Any') return true;
-          final range = t.split('-');
-          final start = _timeFormat.parse(range.first).hour;
-          final end = _timeFormat.parse(range.last).hour;
-          return (start <= end && hour >= start && hour < end) ||
-              (start > end && (hour < end || hour >= start));
-        });
+        (hour == null ||
+            times.any((t) {
+              if (t == 'Any') return true;
+              final range = t.split('-');
+              final start = _timeFormat.parse(range.first).hour;
+              final end = _timeFormat.parse(range.last).hour;
+              return (start <= end && hour >= start && hour < end) ||
+                  (start > end && (hour < end || hour >= start));
+            }));
   }
 
   @override

@@ -78,6 +78,9 @@ class MonthHour {
 
   const MonthHour(this.month, [this.hour]);
 
+  MonthHour.fromDateTime(DateTime dateTime)
+      : this(dateTime.month, dateTime.hour);
+
   @override
   String toString() {
     final dateTime = DateTime(0, month, 1, hour ?? 0);
