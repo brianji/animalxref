@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
+import 'filter.dart';
+
 enum CritterType {
   fish,
   bug,
@@ -30,9 +32,9 @@ class Critter {
     this.size,
   });
 
-  bool isAvailable(DateTime dateTime, bool isSouthern) {
-    final month = dateTime.month;
-    final hour = dateTime.hour;
+  bool isAvailable(MonthHour monthHour, bool isSouthern) {
+    final month = monthHour.month;
+    final hour = monthHour.hour;
     final months = (isSouthern ? south : north).split(', ');
     final times = time.split(', ');
 

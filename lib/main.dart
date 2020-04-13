@@ -56,7 +56,7 @@ class App extends StatelessWidget {
           update: (_, query, __) => query.text.trim(),
         ),
         ProxyProvider6<
-            DateTime,
+            MonthHour,
             ValueNotifier<CritterType>,
             FilterNotifier,
             PreferencesNotifier,
@@ -66,7 +66,7 @@ class App extends StatelessWidget {
           updateShouldNotify: (a, b) => !listEquals(a, b),
           update: (
             _,
-            dateTime,
+            monthHour,
             type,
             filter,
             preferences,
@@ -83,9 +83,9 @@ class App extends StatelessWidget {
               }).toList();
             }
 
-            if (filter.time != Time.any && dateTime != null) {
+            if (filter.time != Time.any && monthHour != null) {
               filtered = filtered.where((f) {
-                return f.isAvailable(dateTime, preferences.isSouthern);
+                return f.isAvailable(monthHour, preferences.isSouthern);
               }).toList();
             }
 
