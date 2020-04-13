@@ -22,25 +22,23 @@ class SettingsPage extends StatelessWidget {
               ListTile(
                 title: Text('Hemisphere'),
                 subtitle: Consumer<PreferencesNotifier>(
-                  builder: (_, notifier, __) {
-                    return Row(
-                      children: [
-                        FilterChip(
-                          showCheckmark: false,
-                          selected: !notifier.isSouthern,
-                          label: Text('Northern'),
-                          onSelected: (_) => notifier.isSouthern = false,
-                        ),
-                        SizedBox(width: 8),
-                        FilterChip(
-                          showCheckmark: false,
-                          selected: notifier.isSouthern,
-                          label: Text('Southern'),
-                          onSelected: (_) => notifier.isSouthern = true,
-                        ),
-                      ],
-                    );
-                  },
+                  builder: (_, notifier, __) => Row(
+                    children: [
+                      FilterChip(
+                        showCheckmark: false,
+                        selected: !notifier.isSouthern,
+                        label: Text('Northern'),
+                        onSelected: (_) => notifier.isSouthern = false,
+                      ),
+                      SizedBox(width: 8),
+                      FilterChip(
+                        showCheckmark: false,
+                        selected: notifier.isSouthern,
+                        label: Text('Southern'),
+                        onSelected: (_) => notifier.isSouthern = true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
