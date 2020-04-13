@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 
 enum Sort {
   name,
@@ -68,6 +69,23 @@ enum Time {
   custom,
 }
 
+class MonthHour {
+  static final _monthFormat = DateFormat.MMM();
+  static final _monthHourFormat = DateFormat('MMM h a');
+
+  final int month;
+  final int hour;
+
+  const MonthHour(this.month, [this.hour]);
+
+  @override
+  String toString() {
+    final dateTime = DateTime(0, month, 1, hour ?? 0);
+    final format = hour == null ? _monthFormat : _monthHourFormat;
+    return format.format(dateTime);
+  }
+}
+
 enum FishSize {
   any,
   smallest,
@@ -114,7 +132,7 @@ class FilterNotifier extends ChangeNotifier {
   BugLocation _bugLocation;
   Sort _sort;
   Time _time;
-  DateTime _dateTime;
+  MonthHour _monthHour;
   FishSize _fishSize;
   Donate _donate;
 
@@ -148,13 +166,13 @@ class FilterNotifier extends ChangeNotifier {
   set time(Time time) {
     if (time == _time) return;
     _time = time;
-    _dateTime = null;
+    _monthHour = null;
     notifyListeners();
   }
 
-  set dateTime(DateTime dateTime) {
-    if (dateTime == _dateTime) return;
-    _dateTime = dateTime;
+  set monthHour(MonthHour monthHour) {
+    if (monthHour == _monthHour) return;
+    _monthHour = monthHour;
     _time = Time.custom;
     notifyListeners();
   }
@@ -175,7 +193,7 @@ class FilterNotifier extends ChangeNotifier {
   BugLocation get bugLocation => _bugLocation;
   Sort get sort => _sort;
   Time get time => _time;
-  DateTime get dateTime => _dateTime;
+  MonthHour get monthHour => _monthHour;
   FishSize get fishSize => _fishSize;
   Donate get donate => _donate;
 }

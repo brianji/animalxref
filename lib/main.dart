@@ -31,7 +31,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<ValueNotifier<CritterType>>(
           create: (_) => ValueNotifier(CritterType.fish),
         ),
-        StreamProvider<DateTime>(
+        StreamProvider<MonthHour>(
           initialData: _getNow(),
           create: (_) => Stream.periodic(
             Duration(minutes: 1),
@@ -41,9 +41,9 @@ class App extends StatelessWidget {
         ChangeNotifierProvider<FilterNotifier>(
           create: (_) => FilterNotifier(),
         ),
-        ProxyProvider2<DateTime, FilterNotifier, DateTime>(
+        ProxyProvider2<MonthHour, FilterNotifier, MonthHour>(
           update: (_, now, filter, __) {
-            return filter.time == Time.now ? now : filter.dateTime;
+            return filter.time == Time.now ? now : filter.monthHour;
           },
         ),
         ChangeNotifierProvider<PreferencesNotifier>(
@@ -169,8 +169,8 @@ class App extends StatelessWidget {
     );
   }
 
-  static DateTime _getNow() {
+  static MonthHour _getNow() {
     final now = DateTime.now().toLocal();
-    return DateTime(now.year, now.month, now.day, now.hour);
+    return MonthHour(now.month, now.hour);
   }
 }

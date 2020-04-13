@@ -1,13 +1,11 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'critter.dart';
 import 'filter.dart';
 
 class Chips extends StatelessWidget {
-  static final _dateFormat = DateFormat.Md().add_jm();
-
   final EdgeInsets padding;
 
   const Chips({Key key, this.padding}) : super(key: key);
@@ -78,68 +76,100 @@ class Chips extends StatelessWidget {
                   : () => filter.sort = Sort.name,
             ),
           ),
-          Builder(
-            builder: (context) => InputChip(
-              label: Text(filter.time == Time.any
-                  ? 'Any'
-                  : filter.time == Time.now
-                      ? 'Now'
-                      : _dateFormat.format(filter.dateTime)),
-              avatar: Icon(Icons.schedule, size: 18),
-              onPressed: () async {
-                final value = await showMenu<Time>(
-                  context: context,
-                  position: _getMenuPosition(context),
-                  items: [
-                    PopupMenuItem(child: Text('Any'), value: Time.any),
-                    PopupMenuItem(child: Text('Now'), value: Time.now),
-                    PopupMenuItem(child: Text('Custom'), value: Time.custom),
-                  ],
-                );
-                if (value == null) return;
-
-                switch (value) {
-                  case Time.any:
+          FilterChip(
+            label: Text('Now'),
+            avatar: Icon(Icons.schedule, size: 18),
+            onSelected: (v) => filter.time = v ? Time.now : Time.any,
+            selected: filter.time == Time.now,
+            showCheckmark: false,
+          ),
+          if (filter.time != Time.now)
+            Builder(
+              builder: (context) => FilterChip(
+                label: Text(filter.time == Time.any
+                    ? 'Any'
+                    : filter.monthHour.toString()),
+                avatar: Icon(Icons.event, size: 18),
+                onSelected: (v) async {
+                  if (!v) {
                     filter.time = Time.any;
                     return;
-                  case Time.now:
-                    filter.time = Time.now;
-                    return;
-                  case Time.custom:
-                    break;
-                }
+                  }
 
-                final now = DateTime.now().toLocal();
-                final date = await showDatePicker(
-                  context: context,
-                  initialDate: now,
-                  firstDate: now,
-                  lastDate: DateTime(now.year + 1, now.month, now.day),
-                  builder: _buildPicker,
-                );
-                if (date == null) return;
+                  final notifier = ValueNotifier(
+                    MonthHour(DateTime.now().toLocal().month),
+                  );
+                  var addTime = false;
 
-                final time = await showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.now(),
-                  builder: _buildPicker,
-                );
-                if (time == null) return;
+                  final month = await showModal<MonthHour>(
+                    context: context,
+                    configuration: FadeScaleTransitionConfiguration(),
+                    builder: (context) => AlertDialog(
+                      title: Text('Choose a month'),
+                      content: ChangeNotifierProvider.value(
+                        value: notifier,
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          crossAxisCount: 4,
+                          children: [
+                            _MonthButton(text: 'Jan', value: 1),
+                            _MonthButton(text: 'Feb', value: 2),
+                            _MonthButton(text: 'Mar', value: 3),
+                            _MonthButton(text: 'Apr', value: 4),
+                            _MonthButton(text: 'May', value: 5),
+                            _MonthButton(text: 'Jun', value: 6),
+                            _MonthButton(text: 'Jul', value: 7),
+                            _MonthButton(text: 'Aug', value: 8),
+                            _MonthButton(text: 'Sept', value: 9),
+                            _MonthButton(text: 'Oct', value: 10),
+                            _MonthButton(text: 'Nov', value: 11),
+                            _MonthButton(text: 'Dec', value: 12),
+                          ],
+                        ),
+                      ),
+                      actions: [
+                        FlatButton(
+                          child: Text('Cancel'),
+                          onPressed: Navigator.of(context).pop,
+                        ),
+                        FlatButton(
+                          child: Text('Add time'),
+                          onPressed: () async {
+                            addTime = true;
+                            Navigator.of(context).pop(notifier.value);
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('Apply'),
+                          onPressed: () {
+                            Navigator.of(context).pop(notifier.value);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                  if (month == null) return;
 
-                filter.dateTime = DateTime(
-                  date.year,
-                  date.month,
-                  date.day,
-                  time.hour,
-                  time.minute,
-                );
-              },
-              onDeleted:
-                  filter.time == Time.any ? null : () => filter.time = Time.any,
-              selected: filter.time != Time.any,
-              showCheckmark: false,
+                  if (addTime) {
+                    final time = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.now(),
+                      builder: _buildPicker,
+                    );
+                    notifier.value = MonthHour(
+                      notifier.value.month,
+                      time?.hour,
+                    );
+                  }
+
+                  filter.monthHour = notifier.value;
+                },
+                selected: filter.time != Time.any,
+                showCheckmark: false,
+              ),
             ),
-          ),
           FilterChip(
             label: Text('Donate'),
             avatar: Icon(Icons.home, size: 18),
@@ -279,6 +309,33 @@ class Chips extends StatelessWidget {
         ),
       ),
       Offset.zero & overlay.size,
+    );
+  }
+}
+
+class _MonthButton extends StatelessWidget {
+  final String text;
+  final int value;
+
+  const _MonthButton({Key key, this.text, this.value}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final notifier = Provider.of<ValueNotifier<MonthHour>>(context);
+    final theme = ChipTheme.of(context);
+    final month = notifier.value.month;
+    return Material(
+      borderRadius: BorderRadius.circular(50),
+      color: month == value ? theme.selectedColor : theme.backgroundColor,
+      child: InkWell(
+        onTap: () => notifier.value = MonthHour(value),
+        child: Container(
+          width: 100,
+          height: 100,
+          alignment: Alignment.center,
+          child: Text(text),
+        ),
+      ),
     );
   }
 }
