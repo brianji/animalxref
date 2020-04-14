@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
@@ -87,6 +89,14 @@ class MonthHour {
     final format = hour == null ? _monthFormat : _monthHourFormat;
     return format.format(dateTime);
   }
+
+  @override
+  bool operator ==(other) {
+    return other is MonthHour && month == other.month && hour == other.hour;
+  }
+
+  @override
+  int get hashCode => hashValues(month, hour);
 }
 
 enum FishSize {
