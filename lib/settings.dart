@@ -41,6 +41,37 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
               ),
+              ListTile(
+                title: Text('Donation data'),
+                subtitle: ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: [
+                    Builder(
+                      builder: (context) => FlatButton(
+                        onPressed: () => Provider.of<PreferencesNotifier>(
+                          context,
+                          listen: false,
+                        ).import(
+                          onSuccess: () => Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Import succeeded')),
+                          ),
+                          onError: () => Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Import failed')),
+                          ),
+                        ),
+                        child: Text('Import'),
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: Provider.of<PreferencesNotifier>(
+                        context,
+                        listen: false,
+                      ).export,
+                      child: Text('Export'),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

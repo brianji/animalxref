@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:html' hide VoidCallback;
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,9 +15,10 @@ class PreferencesNotifier extends ChangeNotifier {
   PreferencesNotifier(this._sharedPreferences)
       : _donated = _sharedPreferences
             .getKeys()
+            .where((k) => k != _southernKey)
             .where((k) => _sharedPreferences.getBool(k) ?? false)
             .toSet(),
-        _isSouthern = _sharedPreferences.getBool(_southernKey);
+        _isSouthern = _sharedPreferences.getBool(_southernKey) ?? false;
 
   bool isDonated(String name) => _donated.contains(name);
 
@@ -37,5 +42,32 @@ class PreferencesNotifier extends ChangeNotifier {
     _isSouthern = isSouthern;
     _sharedPreferences.setBool(_southernKey, isSouthern);
     notifyListeners();
+  }
+
+  Future<void> import({VoidCallback onSuccess, VoidCallback onError}) async {
+    try {
+      final uploadInput = FileUploadInputElement()..click();
+      await uploadInput.onChange.first;
+
+      final file = uploadInput.files.first;
+      final reader = FileReader()..readAsText(file);
+      await reader.onLoadEnd.first;
+
+      final settings = jsonDecode(reader.result);
+      await _sharedPreferences.clear();
+      settings.keys.forEach((k) => setDonated(k, true));
+      onSuccess();
+    } catch (_) {
+      onError();
+    }
+  }
+
+  void export() {
+    final contents = Uri.encodeComponent(
+      jsonEncode(Map.fromIterable(_donated, value: (_) => true)),
+    );
+    AnchorElement(href: 'data:text/plain;charset=utf-8,$contents')
+      ..setAttribute('download', 'settings.txt')
+      ..click();
   }
 }
