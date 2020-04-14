@@ -54,8 +54,10 @@ class PreferencesNotifier extends ChangeNotifier {
       await reader.onLoadEnd.first;
 
       final settings = jsonDecode(reader.result);
+      _donated.clear();
       await _sharedPreferences.clear();
       settings.keys.forEach((k) => setDonated(k, true));
+      notifyListeners();
       onSuccess();
     } catch (_) {
       onError();
