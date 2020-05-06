@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
           );
         },
         child: Builder(
-          key: _CrittersKey(critters),
+          key: _CrittersKey(type.value, critters),
           builder: (context) {
             if (critters == null) return SizedBox.shrink();
 
@@ -97,15 +97,18 @@ class HomePage extends StatelessWidget {
 }
 
 class _CrittersKey extends LocalKey {
+  final CritterType _type;
   final List<Critter> _critters;
 
-  const _CrittersKey(this._critters);
+  const _CrittersKey(this._type, this._critters);
 
   @override
   bool operator ==(other) {
-    return other is _CrittersKey && listEquals(_critters, other._critters);
+    return other is _CrittersKey &&
+        _type == other._type &&
+        listEquals(_critters, other._critters);
   }
 
   @override
-  int get hashCode => hashList(_critters);
+  int get hashCode => hashValues(_type, _critters);
 }
