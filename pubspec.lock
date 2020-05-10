@@ -14,7 +14,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.11"
+    version: "1.14.12"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -66,7 +66,7 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.6+3"
+    version: "0.5.7+1"
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -109,4 +109,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.7.2 <3.0.0"
-  flutter: ">=1.12.13+hotfix.4 <2.0.0"
+  flutter: ">=1.12.13+hotfix.5 <2.0.0"
