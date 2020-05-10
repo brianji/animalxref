@@ -613,7 +613,7 @@
 	},
 	{
 		"Name": "Mahi-mahi",
-		"Location": "Sea",
+		"Location": "Pier",
 		"Size": "Large",
 		"Price": 6000,
 		"Time": "Any",
