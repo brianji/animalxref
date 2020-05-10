@@ -22,12 +22,10 @@ class HomePage extends StatelessWidget {
     final critters = Provider.of<List<Critter>>(context);
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight + 48),
         child: Material(
-          color: Theme.of(context).canvasColor.withOpacity(0.97),
+          color: Theme.of(context).canvasColor,
           elevation: 1,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,13 +37,11 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: PageTransitionSwitcher(
-        transitionBuilder: (child, a1, a2) {
-          return FadeThroughTransition(
-            animation: a1,
-            secondaryAnimation: a2,
-            child: child,
-          );
-        },
+        transitionBuilder: (child, a1, a2) => FadeThroughTransition(
+          animation: a1,
+          secondaryAnimation: a2,
+          child: child,
+        ),
         child: Builder(
           key: _CrittersKey(type.value, critters),
           builder: (context) {
@@ -54,7 +50,7 @@ class HomePage extends StatelessWidget {
             if (critters.isEmpty) {
               return Container(
                 alignment: Alignment.center,
-                padding: MediaQuery.of(context).padding + EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Text(
                   'No ${type.value == CritterType.fish ? '🎣' : '🐛'}',
                   style: Theme.of(context).textTheme.headline4,
@@ -63,9 +59,7 @@ class HomePage extends StatelessWidget {
             }
 
             return ListView.separated(
-              padding: MediaQuery.of(context).padding +
-                  EdgeInsets.symmetric(vertical: 8) +
-                  padding,
+              padding: EdgeInsets.symmetric(vertical: 8) + padding,
               itemCount: critters.length,
               separatorBuilder: (_, __) => Divider(
                 thickness: 1,
@@ -78,7 +72,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).bottomAppBarColor.withOpacity(0.97),
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         currentIndex: type.value == CritterType.fish ? 0 : 1,
         onTap: (i) => type.value = i == 0 ? CritterType.fish : CritterType.bug,
         items: [
