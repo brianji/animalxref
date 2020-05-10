@@ -12,11 +12,11 @@ class Chips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filter = Provider.of<FilterNotifier>(context);
+    final filter = context.watch<FilterNotifier>();
     final sortLabel = filter.sort == Sort.name
         ? 'Name'
         : filter.sort == Sort.bells ? 'Bells' : 'Size';
-    final type = Provider.of<ValueNotifier<CritterType>>(context).value;
+    final type = context.watch<ValueNotifier<CritterType>>().value;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -91,9 +91,8 @@ class Chips extends StatelessWidget {
                     : filter.monthHour.toString()),
                 avatar: Icon(Icons.event, size: 18),
                 onPressed: () async {
-                  final notifier = ValueNotifier(
-                      Provider.of<MonthHour>(context, listen: false) ??
-                          MonthHour.fromDateTime(DateTime.now().toLocal()));
+                  final notifier = ValueNotifier(context.read<MonthHour>() ??
+                      MonthHour.fromDateTime(DateTime.now().toLocal()));
                   var addTime = false;
 
                   final month = await showModal<MonthHour>(
@@ -347,7 +346,7 @@ class _MonthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = Provider.of<ValueNotifier<MonthHour>>(context);
+    final notifier = context.watch<ValueNotifier<MonthHour>>();
     final theme = ChipTheme.of(context);
     final month = notifier.value.month;
     return Material(

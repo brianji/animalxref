@@ -18,8 +18,8 @@ class HomePage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final inset = max(0, (width - _maxWidth) / 2);
     final padding = EdgeInsets.symmetric(horizontal: inset);
-    final type = Provider.of<ValueNotifier<CritterType>>(context);
-    final critters = Provider.of<List<Critter>>(context);
+    final type = context.watch<ValueNotifier<CritterType>>();
+    final critters = context.watch<List<Critter>>();
 
     return Scaffold(
       appBar: PreferredSize(

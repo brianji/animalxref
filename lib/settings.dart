@@ -48,25 +48,25 @@ class SettingsPage extends StatelessWidget {
                   children: [
                     Builder(
                       builder: (context) => FlatButton(
-                        onPressed: () => Provider.of<PreferencesNotifier>(
-                          context,
-                          listen: false,
-                        ).import(
-                          onSuccess: () => Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Import succeeded')),
-                          ),
-                          onError: () => Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Import failed')),
-                          ),
-                        ),
+                        onPressed: () {
+                          context.read<PreferencesNotifier>().import(
+                            onSuccess: () {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Import succeeded')),
+                              );
+                            },
+                            onError: () {
+                              return Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Import failed')),
+                              );
+                            },
+                          );
+                        },
                         child: Text('Import'),
                       ),
                     ),
                     FlatButton(
-                      onPressed: Provider.of<PreferencesNotifier>(
-                        context,
-                        listen: false,
-                      ).export,
+                      onPressed: context.read<PreferencesNotifier>().export,
                       child: Text('Export'),
                     ),
                   ],

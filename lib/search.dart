@@ -23,7 +23,7 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final textEditingController = Provider.of<TextEditingController>(context);
+    final textEditingController = context.watch<TextEditingController>();
 
     return Card(
       elevation: 2.0,
