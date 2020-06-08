@@ -60,13 +60,26 @@ class HomePage extends StatelessWidget {
 
             return ListView.separated(
               padding: EdgeInsets.symmetric(vertical: 8) + padding,
-              itemCount: critters.length,
+              itemCount: critters.length + 1,
               separatorBuilder: (_, __) => Divider(
                 thickness: 1,
                 indent: 16,
                 endIndent: 16,
               ),
-              itemBuilder: (_, i) => CritterTile(critter: critters[i]),
+              itemBuilder: (context, i) {
+                if (i-- == 0) {
+                  final text = '${critters.length} '
+                      '${critters.length == 1 ? 'critter' : 'critters'}';
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Text(
+                      text.toUpperCase(),
+                      style: Theme.of(context).textTheme.overline,
+                    ),
+                  );
+                }
+                return CritterTile(critter: critters[i]);
+              },
             );
           },
         ),
