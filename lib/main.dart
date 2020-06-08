@@ -147,6 +147,7 @@ class App extends StatelessWidget {
               primarySwatch: Colors.lightGreen,
               typography: typography,
               pageTransitionsTheme: pageTransitionsTheme,
+              platform: defaultTargetPlatform,
             ),
             darkTheme: darkTheme.copyWith(
               toggleableActiveColor: Colors.lightGreenAccent[200],
@@ -157,6 +158,7 @@ class App extends StatelessWidget {
               ),
               typography: typography,
               pageTransitionsTheme: pageTransitionsTheme,
+              platform: defaultTargetPlatform,
             ),
             initialRoute: '/',
             routes: {
