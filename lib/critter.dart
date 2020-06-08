@@ -57,6 +57,16 @@ class Critter {
             }));
   }
 
+  bool lastMonth(int month, bool isSouthern) {
+    final months = (isSouthern ? south : north).split(', ');
+    return months.any((m) {
+      if (m == 'Any') return false;
+      final range = m.split('-');
+      final end = _monthFormat.parse(range.last).month;
+      return month == end;
+    });
+  }
+
   @override
   bool operator ==(other) {
     return other is Critter &&

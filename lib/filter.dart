@@ -140,6 +140,11 @@ enum Donate {
   no,
 }
 
+enum LastMonth {
+  yes,
+  no,
+}
+
 class FilterNotifier extends ChangeNotifier {
   FishLocation _fishLocation;
   BugLocation _bugLocation;
@@ -148,6 +153,7 @@ class FilterNotifier extends ChangeNotifier {
   MonthHour _monthHour;
   FishSize _fishSize;
   Donate _donate;
+  LastMonth _lastMonth;
 
   FilterNotifier() {
     _fishLocation = FishLocation.any;
@@ -156,6 +162,7 @@ class FilterNotifier extends ChangeNotifier {
     _time = Time.any;
     _fishSize = FishSize.any;
     _donate = Donate.any;
+    _lastMonth = LastMonth.no;
   }
 
   set fishLocation(FishLocation fishLocation) {
@@ -180,6 +187,7 @@ class FilterNotifier extends ChangeNotifier {
     if (time == _time) return;
     _time = time;
     _monthHour = null;
+    if (time == Time.any) _lastMonth = LastMonth.no;
     notifyListeners();
   }
 
@@ -187,6 +195,17 @@ class FilterNotifier extends ChangeNotifier {
     if (monthHour == _monthHour) return;
     _monthHour = monthHour;
     _time = Time.custom;
+    if (monthHour == null) _lastMonth = LastMonth.no;
+    notifyListeners();
+  }
+
+  set lastMonth(LastMonth lastMonth) {
+    if (lastMonth == _lastMonth) return;
+    _lastMonth = lastMonth;
+    if (_time != Time.now) {
+      _time = Time.custom;
+      _monthHour ??= MonthHour(DateTime.now().toLocal().month);
+    }
     notifyListeners();
   }
 
@@ -209,4 +228,5 @@ class FilterNotifier extends ChangeNotifier {
   MonthHour get monthHour => _monthHour;
   FishSize get fishSize => _fishSize;
   Donate get donate => _donate;
+  LastMonth get lastMonth => _lastMonth;
 }

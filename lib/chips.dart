@@ -194,6 +194,15 @@ class Chips extends StatelessWidget {
               ),
             ),
           FilterChip(
+            label: Text('Last'),
+            avatar: Icon(Icons.timer, size: 18),
+            onSelected: (v) {
+              filter.lastMonth = v ? LastMonth.yes : LastMonth.no;
+            },
+            selected: filter.lastMonth == LastMonth.yes,
+            showCheckmark: false,
+          ),
+          FilterChip(
             label: Text('Donate'),
             avatar: Icon(Icons.home, size: 18),
             onSelected: (v) => filter.donate = v ? Donate.no : Donate.any,

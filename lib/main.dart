@@ -119,6 +119,12 @@ class App extends StatelessWidget {
               }).toList();
             }
 
+            if (filter.lastMonth == LastMonth.yes) {
+              filtered = filtered.where((f) {
+                return f.lastMonth(monthHour.month, preferences.isSouthern);
+              }).toList();
+            }
+
             if (filter.sort == Sort.bells) {
               filtered.sort((a, b) => b.price.compareTo(a.price));
             } else if (type.value == CritterType.fish &&
