@@ -110,7 +110,7 @@
 	{
 		"Name": "Snapping Turtle",
 		"Location": "River",
-		"Size": "X Large",
+		"Size": "Large",
 		"Price": 5000,
 		"Time": "9AM-4AM",
 		"North": "Apr-Oct",
@@ -164,7 +164,7 @@
 	{
 		"Name": "Giant Snakehead",
 		"Location": "Pond",
-		"Size": "X Large",
+		"Size": "Large",
 		"Price": 5500,
 		"Time": "9AM-4PM",
 		"North": "Jun-Aug",
@@ -263,7 +263,7 @@
 	{
 		"Name": "Stringfish",
 		"Location": "River (Clifftop)",
-		"Size": "XX Large",
+		"Size": "X Large",
 		"Price": 15000,
 		"Time": "4PM-9AM",
 		"North": "Dec-Mar",
@@ -272,7 +272,7 @@
 	{
 		"Name": "Salmon",
 		"Location": "River (Mouth)",
-		"Size": "Small",
+		"Size": "Large",
 		"Price": 700,
 		"Time": "Any",
 		"North": "Sept",
@@ -281,7 +281,7 @@
 	{
 		"Name": "King Salmon",
 		"Location": "River (Mouth)",
-		"Size": "X Small",
+		"Size": "X Large",
 		"Price": 1800,
 		"Time": "Any",
 		"North": "Sept",
@@ -308,7 +308,7 @@
 	{
 		"Name": "Nibble Fish",
 		"Location": "River",
-		"Size": "Small",
+		"Size": "X Small",
 		"Price": 1500,
 		"Time": "9AM-4PM",
 		"North": "May-Sept",
@@ -344,7 +344,7 @@
 	{
 		"Name": "Rainbowfish",
 		"Location": "River",
-		"Size": "Small",
+		"Size": "X Small",
 		"Price": 800,
 		"Time": "9AM-4PM",
 		"North": "May-Oct",
@@ -380,7 +380,7 @@
 	{
 		"Name": "Gar",
 		"Location": "Pond",
-		"Size": "XX Large",
+		"Size": "X Large",
 		"Price": 6000,
 		"Time": "4PM-9AM",
 		"North": "Jun-Sept",
@@ -551,7 +551,7 @@
 	{
 		"Name": "Olive Flounder",
 		"Location": "Sea",
-		"Size": "Large",
+		"Size": "X Large",
 		"Price": 800,
 		"Time": "Any",
 		"North": "Any",
@@ -569,7 +569,7 @@
 	{
 		"Name": "Moray Eel",
 		"Location": "Sea",
-		"Size": "X Large",
+		"Size": "Narrow",
 		"Price": 2000,
 		"Time": "Any",
 		"North": "Aug-Oct",
@@ -587,7 +587,7 @@
 	{
 		"Name": "Tuna",
 		"Location": "Pier",
-		"Size": "X Large",
+		"Size": "XX Large",
 		"Price": 7000,
 		"Time": "Any",
 		"North": "Nov-Apr",
@@ -596,7 +596,7 @@
 	{
 		"Name": "Blue Marlin",
 		"Location": "Pier",
-		"Size": "X Large",
+		"Size": "XX Large",
 		"Price": 10000,
 		"Time": "Any",
 		"North": "Jul-Sept, Nov-Apr",
@@ -605,7 +605,7 @@
 	{
 		"Name": "Giant Trevally",
 		"Location": "Pier",
-		"Size": "Large",
+		"Size": "X Large",
 		"Price": 4500,
 		"Time": "Any",
 		"North": "May-Oct",
@@ -614,7 +614,7 @@
 	{
 		"Name": "Mahi-mahi",
 		"Location": "Pier",
-		"Size": "Large",
+		"Size": "X Large",
 		"Price": 6000,
 		"Time": "Any",
 		"North": "May-Oct",
