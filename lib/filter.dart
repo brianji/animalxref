@@ -113,24 +113,24 @@ enum FishSize {
 
 const fishSizeText = {
   FishSize.any: 'Any',
-  FishSize.smallest: 'Smallest',
+  FishSize.smallest: 'X Small',
   FishSize.small: 'Small',
   FishSize.medium: 'Medium',
   FishSize.large: 'Large',
   FishSize.xLarge: 'X Large',
-  FishSize.largest: 'Largest',
+  FishSize.largest: 'XX Large',
   FishSize.fin: 'Fin',
   FishSize.narrow: 'Narrow',
 };
 
 const fishSizeIndex = {
   'Any': 0,
-  'Smallest': 1,
+  'X Small': 1,
   'Small': 2,
   'Medium': 3,
   'Large': 4,
   'X Large': 5,
-  'Largest': 6,
+  'XX Large': 6,
   'Fin': 7,
   'Narrow': 8,
 };

@@ -2,7 +2,7 @@
 	{
 		"Name": "Bitterling",
 		"Location": "River",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 900,
 		"Time": "Any",
 		"North": "Nov-Mar",
@@ -11,7 +11,7 @@
 	{
 		"Name": "Pale Chub",
 		"Location": "River",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 160,
 		"Time": "9AM-4PM",
 		"North": "Any",
@@ -56,7 +56,7 @@
 	{
 		"Name": "Goldfish",
 		"Location": "Pond",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 1300,
 		"Time": "Any",
 		"North": "Any",
@@ -65,7 +65,7 @@
 	{
 		"Name": "Pop-eyed Goldfish",
 		"Location": "Pond",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 1300,
 		"Time": "9AM-4PM",
 		"North": "Any",
@@ -83,7 +83,7 @@
 	{
 		"Name": "Killifish",
 		"Location": "Pond",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 300,
 		"Time": "Any",
 		"North": "Apr-Aug",
@@ -119,7 +119,7 @@
 	{
 		"Name": "Tadpole",
 		"Location": "Pond",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 100,
 		"Time": "Any",
 		"North": "Mar-Jul",
@@ -263,7 +263,7 @@
 	{
 		"Name": "Stringfish",
 		"Location": "River (Clifftop)",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 15000,
 		"Time": "4PM-9AM",
 		"North": "Dec-Mar",
@@ -281,7 +281,7 @@
 	{
 		"Name": "King Salmon",
 		"Location": "River (Mouth)",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 1800,
 		"Time": "Any",
 		"North": "Sept",
@@ -299,7 +299,7 @@
 	{
 		"Name": "Guppy",
 		"Location": "River",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 1300,
 		"Time": "9AM-4PM",
 		"North": "Apr-Nov",
@@ -335,7 +335,7 @@
 	{
 		"Name": "Neon Tetra",
 		"Location": "River",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 500,
 		"Time": "9AM-4PM",
 		"North": "Apr-Nov",
@@ -380,7 +380,7 @@
 	{
 		"Name": "Gar",
 		"Location": "Pond",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 6000,
 		"Time": "4PM-9AM",
 		"North": "Jun-Sept",
@@ -389,7 +389,7 @@
 	{
 		"Name": "Arapaima",
 		"Location": "River",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 10000,
 		"Time": "4PM-9AM",
 		"North": "Jun-Sept",
@@ -407,7 +407,7 @@
 	{
 		"Name": "Sturgeon",
 		"Location": "River (Mouth)",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 10000,
 		"Time": "Any",
 		"North": "Sept-Mar",
@@ -416,7 +416,7 @@
 	{
 		"Name": "Sea Butterfly",
 		"Location": "Sea",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 1000,
 		"Time": "Any",
 		"North": "Dec-Mar",
@@ -425,7 +425,7 @@
 	{
 		"Name": "Sea Horse",
 		"Location": "Sea",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 1100,
 		"Time": "Any",
 		"North": "Apr-Nov",
@@ -434,7 +434,7 @@
 	{
 		"Name": "Clown Fish",
 		"Location": "Sea",
-		"Size": "Smallest",
+		"Size": "X Small",
 		"Price": 650,
 		"Time": "Any",
 		"North": "Apr-Sept",
@@ -461,7 +461,7 @@
 	{
 		"Name": "Napoleonfish",
 		"Location": "Sea",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 10000,
 		"Time": "4AM-9PM",
 		"North": "Jul-Aug",
@@ -695,7 +695,7 @@
 	{
 		"Name": "Oarfish",
 		"Location": "Sea",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 9000,
 		"Time": "Any",
 		"North": "Dec-May",
@@ -713,7 +713,7 @@
 	{
 		"Name": "Coelacanth",
 		"Location": "Sea (Rain)",
-		"Size": "Largest",
+		"Size": "XX Large",
 		"Price": 15000,
 		"Time": "Any",
 		"North": "Any",
