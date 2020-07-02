@@ -11,14 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: git clone -b master https://github.com/flutter/flutter.git
-      - run: export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
-      - run: pwd
-      - run: ls
-      - run: echo $PATH
-      - run: flutter config --enable-web
-      - run: flutter pub get
-      - run: flutter build web --release
+      - run: |
+        git clone -b master https://github.com/flutter/flutter.git
+        export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
+        pwd
+        ls
+        echo $PATH
+        flutter config --enable-web
+        flutter pub get
+        flutter build web --release
       - run: |
           cd build/web
           git init
