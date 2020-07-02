@@ -11,9 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1.2.0
-        with:
-          channel: 'dev'
+      - run: git clone -b master https://github.com/flutter/flutter.git
+      - run: export PATH="$PATH:`pwd`/flutter/bin"
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
