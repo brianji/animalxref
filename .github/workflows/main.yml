@@ -14,9 +14,6 @@ jobs:
       - run: |
           git clone -b master https://github.com/flutter/flutter.git $HOME/flutter
           export PATH="$PATH:$HOME/flutter/bin"
-          pwd
-          ls
-          echo $PATH
           flutter config --enable-web
           flutter pub get
           flutter build web --release
