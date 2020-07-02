@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          git clone -b master https://github.com/flutter/flutter.git
-          export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
+          git clone -b master https://github.com/flutter/flutter.git $HOME
+          export PATH="$PATH:$HOME/flutter/bin"
           pwd
           ls
           echo $PATH
