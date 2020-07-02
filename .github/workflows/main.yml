@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git clone -b master https://github.com/flutter/flutter.git
-      - run: export PATH="$PATH:`pwd`/flutter/bin"
+      - run: export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
