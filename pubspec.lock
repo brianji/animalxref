@@ -7,14 +7,21 @@ packages:
       name: animations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
+  characters:
+    dependency: transitive
+    description:
+      name: characters
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   collection:
     dependency: transitive
     description:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.12"
+    version: "1.14.13"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -108,5 +115,5 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.7.2 <3.0.0"
+  dart: ">=2.9.0-14.0.dev <3.0.0"
   flutter: ">=1.16.0 <2.0.0"
