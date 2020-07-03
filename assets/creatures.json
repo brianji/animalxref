@@ -1,0 +1,282 @@
+[
+  {
+    "Name": "Abalone",
+    "Price": 2000,
+    "Time": "4PM-9AM",
+    "North": "Jun-Jan",
+    "South": "Dec-Jul"
+  },
+  {
+    "Name": "Acorn Barnacle",
+    "Price": 600,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Chambered Nautilus",
+    "Price": 1800,
+    "Time": "4PM-9AM",
+    "North": "Mar-Jun, Sept-Nov",
+    "South": "Sept-Dec, Mar-May"
+  },
+  {
+    "Name": "Dungeoness Crab",
+    "Price": 1900,
+    "Time": "Any",
+    "North": "Nov-May",
+    "South": "May-Nov"
+  },
+  {
+    "Name": "Firefly Squid",
+    "Price": 1400,
+    "Time": "9PM-4AM",
+    "North": "Mar-Jun",
+    "South": "Sept-Dec"
+  },
+  {
+    "Name": "Flatworm",
+    "Price": 700,
+    "Time": "4PM-9AM",
+    "North": "Aug-Sept",
+    "South": "Feb-Mar"
+  },
+  {
+    "Name": "Gazami Crab",
+    "Price": 2200,
+    "Time": "Any",
+    "North": "Jun-Nov",
+    "South": "Dec-May"
+  },
+  {
+    "Name": "Giant Isopod",
+    "Price": 12000,
+    "Time": "9AM-4PM, 9PM-4AM",
+    "North": "Jul-Oct",
+    "South": "Jan-Apr"
+  },
+  {
+    "Name": "Gigas Giant Clam",
+    "Price": 15000,
+    "Time": "Any",
+    "North": "May-Sept",
+    "South": "Nov-Mar"
+  },
+  {
+    "Name": "Horseshoe Crab",
+    "Price": 2500,
+    "Time": "9PM-4AM",
+    "North": "Jul-Sept",
+    "South": "Jan-Mar"
+  },
+  {
+    "Name": "Lobster",
+    "Price": 4500,
+    "Time": "Any",
+    "North": "Apr-Jun, Dec-Jan",
+    "South": "Oct-Dec, Jun-Jul"
+  },
+  {
+    "Name": "Mantis Shrimp",
+    "Price": 2500,
+    "Time": "4PM-9AM",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Moon Jellyfish",
+    "Price": 600,
+    "Time": "Any",
+    "North": "Jul-Sept",
+    "South": "Jan-Mar"
+  },
+  {
+    "Name": "Mussel",
+    "Price": 1500,
+    "Time": "Any",
+    "North": "Jun-Dec",
+    "South": "Dec-Jun"
+  },
+  {
+    "Name": "Octopus",
+    "Price": 1200,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Oyster",
+    "Price": 1100,
+    "Time": "Any",
+    "North": "Sept-Feb",
+    "South": "Mar-Aug"
+  },
+  {
+    "Name": "Pearl Oyster",
+    "Price": 2800,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Red King Crab",
+    "Price": 8000,
+    "Time": "Any",
+    "North": "Nov-Mar",
+    "South": "May-Sept"
+  },
+  {
+    "Name": "Scallop",
+    "Price": 1200,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Sea Anemone",
+    "Price": 500,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Sea Cucumber",
+    "Price": 500,
+    "Time": "Any",
+    "North": "Nov-Apr",
+    "South": "May-Oct"
+  },
+  {
+    "Name": "Sea Grapes",
+    "Price": 900,
+    "Time": "Any",
+    "North": "Jun-Sept",
+    "South": "Dec-Mar"
+  },
+  {
+    "Name": "Sea Pig",
+    "Price": 10000,
+    "Time": "4PM-9AM",
+    "North": "Nov-Feb",
+    "South": "May-Aug"
+  },
+  {
+    "Name": "Sea Pineapple",
+    "Price": 1500,
+    "Time": "Any",
+    "North": "Apr-Aug",
+    "South": "Oct-Feb"
+  },
+  {
+    "Name": "Sea Slug",
+    "Price": 600,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Sea Star",
+    "Price": 500,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  },
+  {
+    "Name": "Sea Urchin",
+    "Price": 1700,
+    "Time": "Any",
+    "North": "May-Sept",
+    "South": "Nov-Mar"
+  },
+  {
+    "Name": "Seaweed",
+    "Price": 600,
+    "Time": "Any",
+    "North": "Oct-Jul",
+    "South": "Apr-Jan"
+  },
+  {
+    "Name": "Slate Pencil Urchin",
+    "Price": 2000,
+    "Time": "4PM-9AM",
+    "North": "May-Sept",
+    "South": "Nov-Mar"
+  },
+  {
+    "Name": "Snow Crab",
+    "Price": 6000,
+    "Time": "Any",
+    "North": "Nov-Apr",
+    "South": "May-Oct"
+  },
+  {
+    "Name": "Spider Crab",
+    "Price": 12000,
+    "Time": "Any",
+    "North": "Mar-Apr",
+    "South": "Sept-Oct"
+  },
+  {
+    "Name": "Spiny Lobster",
+    "Price": 5000,
+    "Time": "9PM-4AM",
+    "North": "Oct-Dec",
+    "South": "Apr-Jun"
+  },
+  {
+    "Name": "Spotted Garden Eel",
+    "Price": 1100,
+    "Time": "4AM-9PM",
+    "North": "May-Oct",
+    "South": "Nov-Apr"
+  },
+  {
+    "Name": "Sweet Shrimp",
+    "Price": 1400,
+    "Time": "4PM-9AM",
+    "North": "Sept-Feb",
+    "South": "Mar-Aug"
+  },
+  {
+    "Name": "Tiger Prawn",
+    "Price": 3000,
+    "Time": "4PM-9AM",
+    "North": "Jun-Sept",
+    "South": "Dec-Mar"
+  },
+  {
+    "Name": "Turban Shell",
+    "Price": 1000,
+    "Time": "Any",
+    "North": "Mar-May, Sept-Dec",
+    "South": "Mar-Jun, Sept-Nov"
+  },
+  {
+    "Name": "Umbrella Octopus",
+    "Price": 6000,
+    "Time": "Any",
+    "North": "Mar-May, Sept-Nov",
+    "South": "Mar-May, Sept-Nov"
+  },
+  {
+    "Name": "Vampire Squid",
+    "Price": 10000,
+    "Time": "4PM-9AM",
+    "North": "May-Aug",
+    "South": "Nov-Feb"
+  },
+  {
+    "Name": "Venus' Flower Basket",
+    "Price": 5000,
+    "Time": "Any",
+    "North": "Oct-Feb",
+    "South": "Apr-Aug"
+  },
+  {
+    "Name": "Whelk",
+    "Price": 1000,
+    "Time": "Any",
+    "North": "Any",
+    "South": "Any"
+  }
+]

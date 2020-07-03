@@ -6,12 +6,14 @@ import 'critter.dart';
 
 const _fishFile = 'assets/fish.json';
 const _bugsFile = 'assets/bugs.json';
+const _seaCreaturesFile = 'assets/creatures.json';
 
 class CritterService {
   Future<Map<CritterType, List<Critter>>> get critters async {
     return {
       CritterType.fish: await _loadCritters(_fishFile),
       CritterType.bug: await _loadCritters(_bugsFile),
+      CritterType.seaCreature: await _loadCritters(_seaCreaturesFile),
     };
   }
 }

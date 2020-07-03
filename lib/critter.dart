@@ -8,6 +8,7 @@ import 'filter.dart';
 enum CritterType {
   fish,
   bug,
+  seaCreature,
 }
 
 class Critter {

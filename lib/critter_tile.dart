@@ -19,10 +19,12 @@ class CritterTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.room, size: 18),
-              SizedBox(width: 4),
-              Text(critter.location),
-              SizedBox(width: 8),
+              if (critter.location != null) ...[
+                Icon(Icons.room, size: 18),
+                SizedBox(width: 4),
+                Text(critter.location),
+                SizedBox(width: 8),
+              ],
               if (critter.size != null) ...[
                 Icon(Icons.search, size: 18),
                 SizedBox(width: 4),

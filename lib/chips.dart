@@ -260,7 +260,7 @@ class Chips extends StatelessWidget {
                     : () => filter.fishSize = FishSize.any,
               ),
             ),
-          ] else
+          ] else if (type == CritterType.bug)
             Builder(
               builder: (context) => InputChip(
                 avatar: Icon(Icons.place, size: 18),

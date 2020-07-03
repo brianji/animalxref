@@ -48,11 +48,14 @@ class HomePage extends StatelessWidget {
             if (critters == null) return SizedBox.shrink();
 
             if (critters.isEmpty) {
+              final emoji = type.value == CritterType.fish
+                  ? '🎣'
+                  : type.value == CritterType.bug ? '🐛' : '🐚';
               return Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(16),
                 child: Text(
-                  'No ${type.value == CritterType.fish ? '🎣' : '🐛'}',
+                  'No $emoji',
                   style: Theme.of(context).textTheme.headline4,
                 ),
               );
@@ -86,8 +89,14 @@ class HomePage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).bottomAppBarColor,
-        currentIndex: type.value == CritterType.fish ? 0 : 1,
-        onTap: (i) => type.value = i == 0 ? CritterType.fish : CritterType.bug,
+        currentIndex: type.value == CritterType.fish
+            ? 0
+            : type.value == CritterType.bug ? 1 : 2,
+        onTap: (i) {
+          type.value = i == 0
+              ? CritterType.fish
+              : i == 1 ? CritterType.bug : CritterType.seaCreature;
+        },
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.invert_colors),
@@ -96,6 +105,10 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.bug_report),
             title: Text('Bugs'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.grade),
+            title: Text('Sea Creatures'),
           ),
         ],
       ),
