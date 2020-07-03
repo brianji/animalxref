@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bug_report),
-            title: Text('Bugs'),
+            title: Text('Insects'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grade),
