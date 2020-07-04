@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          git clone -b beta https://github.com/flutter/flutter.git $HOME/flutter
+          git clone beta https://github.com/flutter/flutter.git $HOME/flutter
           export PATH="$PATH:$HOME/flutter/bin"
           flutter config --enable-web
-          flutter build web --release
+          flutter build web
       - run: |
           cd build/web
           git init
