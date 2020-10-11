@@ -66,7 +66,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                     ),
                     FlatButton(
-                      onPressed: context.read<PreferencesNotifier>().export,
+                      onPressed: context.watch<PreferencesNotifier>().export,
                       child: Text('Export'),
                     ),
                   ],
