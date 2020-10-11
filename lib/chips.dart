@@ -1,3 +1,4 @@
+import 'package:animalxref/preferences.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -5,25 +6,25 @@ import 'package:provider/provider.dart';
 import 'critter.dart';
 import 'filter.dart';
 
-const _sortKey = Key('sort');
-const _nowKey = Key('now');
-const _timeKey = Key('time');
-const _lastKey = Key('last');
-const _donateKey = Key('donate');
-const _fishLocationKey = Key('fishLocation');
-const _fishSizeKey = Key('fishSize');
-const _bugLocationKey = Key('bugLocation');
-const _resetKey = Key('reset');
+const _sortKey = Key(sort);
+const _nowKey = Key(now);
+const _timeKey = Key(time);
+const _lastKey = Key(last);
+const _donateKey = Key(donate);
+const _fishLocationKey = Key(fishLocation);
+const _fishSizeKey = Key(fishSize);
+const _bugLocationKey = Key(bugLocation);
+const _resetKey = Key(reset);
 
-final _keyToChip = {
-  _sortKey: _SortChip(),
-  _nowKey: _NowChip(),
-  _timeKey: _TimeChip(),
-  _lastKey: _LastChip(),
-  _donateKey: _DonateChip(),
-  _fishLocationKey: _FishLocationChip(),
-  _fishSizeKey: _FishSizeChip(),
-  _bugLocationKey: _BugLocationChip(),
+final _labelToChip = {
+  sort: _SortChip(),
+  now: _NowChip(),
+  time: _TimeChip(),
+  last: _LastChip(),
+  donate: _DonateChip(),
+  fishLocation: _FishLocationChip(),
+  fishSize: _FishSizeChip(),
+  bugLocation: _BugLocationChip(),
 };
 
 class Chips extends StatefulWidget {
@@ -50,27 +51,13 @@ class _ChipsState extends State<Chips> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 48,
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ScrollController()),
-          ChangeNotifierProvider(
-            create: (_) => ValueNotifier([
-              _sortKey,
-              _nowKey,
-              _timeKey,
-              _lastKey,
-              _donateKey,
-              _fishLocationKey,
-              _fishSizeKey,
-              _bugLocationKey,
-            ]),
-          ),
-        ],
+      child: ChangeNotifierProvider(
+        create: (_) => ScrollController(),
         builder: (context, _) {
           final scrollController =
               context.select<ScrollController, ScrollController>((v) => v);
-          final orderNotifier = context.watch<ValueNotifier<List<Key>>>();
-          final order = List.of(orderNotifier.value);
+          final preferencesNotifier = context.watch<PreferencesNotifier>();
+          final order = List.of(preferencesNotifier.order);
 
           return ReorderableListView(
             scrollController: scrollController,
@@ -82,9 +69,9 @@ class _ChipsState extends State<Chips> {
               final removed = order.removeAt(oldIndex);
               if (newIndex > oldIndex) newIndex--;
               order.insert(newIndex, removed);
-              orderNotifier.value = order;
+              preferencesNotifier.order = order;
             },
-            children: [...order.map((k) => _keyToChip[k]), _ResetButton()],
+            children: [...order.map((k) => _labelToChip[k]), _ResetButton()],
           );
         },
       ),

@@ -5,19 +5,43 @@ import 'package:backup/backup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+const _orderKey = 'order';
 const _southernKey = 'southern';
+
+const sort = 'sort';
+const now = 'now';
+const time = 'time';
+const last = 'last';
+const donate = 'donate';
+const fishLocation = 'fishLocation';
+const fishSize = 'fishSize';
+const bugLocation = 'bugLocation';
+const reset = 'reset';
+
+const _defaultOrder = [
+  sort,
+  now,
+  time,
+  last,
+  donate,
+  fishLocation,
+  fishSize,
+  bugLocation,
+];
 
 class PreferencesNotifier extends ChangeNotifier {
   final SharedPreferences _sharedPreferences;
   final Set<String> _donated;
+  List<String> _order;
   bool _isSouthern;
 
   PreferencesNotifier(this._sharedPreferences)
       : _donated = _sharedPreferences
             .getKeys()
-            .where((k) => k != _southernKey)
+            .where((k) => k != _southernKey && k != _orderKey)
             .where((k) => _sharedPreferences.getBool(k) ?? false)
             .toSet(),
+        _order = _sharedPreferences.getStringList(_orderKey) ?? _defaultOrder,
         _isSouthern = _sharedPreferences.getBool(_southernKey) ?? false;
 
   bool isDonated(String name) => _donated.contains(name);
@@ -32,6 +56,15 @@ class PreferencesNotifier extends ChangeNotifier {
     }
 
     _sharedPreferences.setBool(name, donated);
+    notifyListeners();
+  }
+
+  List<String> get order => _order;
+
+  set order(List<String> order) {
+    if (listEquals(order, _order)) return;
+    _order = order;
+    _sharedPreferences.setStringList(_orderKey, order);
     notifyListeners();
   }
 
