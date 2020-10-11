@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:html' hide VoidCallback;
 import 'dart:ui';
 
+import 'package:backup/backup.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,14 +46,10 @@ class PreferencesNotifier extends ChangeNotifier {
 
   Future<void> import({VoidCallback onSuccess, VoidCallback onError}) async {
     try {
-      final uploadInput = FileUploadInputElement()..click();
-      await uploadInput.onChange.first;
+      final json = await Backup.import();
+      if (json == null) return onError();
+      final settings = jsonDecode(json);
 
-      final file = uploadInput.files.first;
-      final reader = FileReader()..readAsText(file);
-      await reader.onLoadEnd.first;
-
-      final settings = jsonDecode(reader.result);
       _donated.clear();
       await _sharedPreferences.clear();
       settings.keys.forEach((k) => setDonated(k, true));
@@ -65,11 +61,7 @@ class PreferencesNotifier extends ChangeNotifier {
   }
 
   void export() {
-    final contents = Uri.encodeComponent(
-      jsonEncode(Map.fromIterable(_donated, value: (_) => true)),
-    );
-    AnchorElement(href: 'data:text/plain;charset=utf-8,$contents')
-      ..setAttribute('download', 'settings.txt')
-      ..click();
+    final contents = jsonEncode(Map.fromIterable(_donated, value: (_) => true));
+    Backup.export(contents);
   }
 }
