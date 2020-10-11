@@ -40,6 +40,20 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
               ListTile(
+                title: Text('Chip Order'),
+                subtitle: ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: [
+                    FlatButton(
+                      onPressed: () {
+                        context.read<PreferencesNotifier>().resetOrder();
+                      },
+                      child: Text('Reset'),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
                 title: Text('Donation data'),
                 subtitle: ButtonBar(
                   alignment: MainAxisAlignment.start,
@@ -69,7 +83,7 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

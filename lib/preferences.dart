@@ -68,6 +68,8 @@ class PreferencesNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetOrder() => order = _defaultOrder;
+
   bool get isSouthern => _isSouthern;
 
   set isSouthern(bool isSouthern) {
