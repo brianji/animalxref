@@ -28,6 +28,10 @@ class _SearchBarState extends State<SearchBar> {
     return Card(
       elevation: 2.0,
       margin: EdgeInsets.only(top: 8, left: 16, right: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+        side: BorderSide(color: Theme.of(context).dividerColor),
+      ),
       child: InkWell(
         onTap: _focusNode.requestFocus,
         child: Row(
