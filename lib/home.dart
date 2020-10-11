@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
             }
 
             return ListView.separated(
-              padding: EdgeInsets.symmetric(vertical: 8) + padding,
+              padding: EdgeInsets.symmetric(vertical: 12) + padding,
               itemCount: critters.length + 1,
               separatorBuilder: (_, __) => Divider(
                 thickness: 1,
