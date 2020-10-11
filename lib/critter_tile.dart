@@ -45,14 +45,23 @@ class CritterTile extends StatelessWidget {
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               SizedBox(height: 2),
+              if (critter.location != null || critter.size != null) ...[
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 2,
+                  children: [
+                    if (critter.location != null)
+                      _MetaData(icon: Icons.room, text: critter.location),
+                    if (critter.size != null)
+                      _MetaData(icon: Icons.search, text: critter.size),
+                  ],
+                ),
+                SizedBox(height: 2),
+              ],
               Wrap(
                 spacing: 8,
                 runSpacing: 2,
                 children: [
-                  if (critter.location != null)
-                    _MetaData(icon: Icons.room, text: critter.location),
-                  if (critter.size != null)
-                    _MetaData(icon: Icons.search, text: critter.size),
                   Selector<PreferencesNotifier, bool>(
                     selector: (_, notifier) => notifier.isSouthern,
                     builder: (_, v, __) => _MetaData(
