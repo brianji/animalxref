@@ -68,6 +68,7 @@ class HomePage extends StatelessWidget {
               itemCount: critters.length + 1,
               separatorBuilder: (_, __) => Divider(
                 thickness: 1,
+                height: 24,
                 indent: 16,
                 endIndent: 16,
               ),
