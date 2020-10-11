@@ -50,7 +50,9 @@ class HomePage extends StatelessWidget {
             if (critters.isEmpty) {
               final emoji = type.value == CritterType.fish
                   ? '🎣'
-                  : type.value == CritterType.bug ? '🐛' : '🐚';
+                  : type.value == CritterType.bug
+                      ? '🐛'
+                      : '🐚';
               return Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(16),
@@ -91,24 +93,28 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).bottomAppBarColor,
         currentIndex: type.value == CritterType.fish
             ? 0
-            : type.value == CritterType.bug ? 1 : 2,
+            : type.value == CritterType.bug
+                ? 1
+                : 2,
         onTap: (i) {
           type.value = i == 0
               ? CritterType.fish
-              : i == 1 ? CritterType.bug : CritterType.seaCreature;
+              : i == 1
+                  ? CritterType.bug
+                  : CritterType.seaCreature;
         },
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.invert_colors),
-            title: Text('Fish'),
+            label: 'Fish',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bug_report),
-            title: Text('Insects'),
+            label: 'Insects',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grade),
-            title: Text('Sea Creatures'),
+            label: 'Sea Creatures',
           ),
         ],
       ),
