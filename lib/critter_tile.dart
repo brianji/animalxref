@@ -13,6 +13,7 @@ class CritterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      dense: true,
       title: Text(critter.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
