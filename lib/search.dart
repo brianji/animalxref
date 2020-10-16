@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'page.dart';
-
 class SearchBar extends StatefulWidget {
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -61,8 +59,7 @@ class _SearchBarState extends State<SearchBar> {
               ),
             IconButton(
               icon: Icon(Icons.settings),
-              onPressed: () =>
-                  context.read<ValueNotifier<PageId>>().value = PageId.settings,
+              onPressed: () => Navigator.of(context).pushNamed('/settings'),
             ),
           ],
         ),

@@ -7,7 +7,6 @@ import 'critter.dart';
 import 'critter_service.dart';
 import 'filter.dart';
 import 'home.dart';
-import 'page.dart';
 import 'preferences.dart';
 import 'settings.dart';
 
@@ -28,9 +27,6 @@ class App extends StatelessWidget {
         Provider.value(value: sharedPreferences),
         FutureProvider<Map<CritterType, List<Critter>>>(
           create: (_) => CritterService().critters,
-        ),
-        ChangeNotifierProvider<ValueNotifier<PageId>>(
-          create: (_) => ValueNotifier(PageId.home),
         ),
         ChangeNotifierProvider<ValueNotifier<CritterType>>(
           create: (_) => ValueNotifier(CritterType.fish),
@@ -143,7 +139,7 @@ class App extends StatelessWidget {
         ),
       ],
       child: Builder(
-        builder: (context) {
+        builder: (_) {
           final typography = Typography.material2018();
           final darkTheme = ThemeData.dark();
           final pageTransitionsTheme = PageTransitionsTheme(
@@ -151,7 +147,6 @@ class App extends StatelessWidget {
               TargetPlatform.android: ZoomPageTransitionsBuilder(),
             },
           );
-          final pageId = context.watch<ValueNotifier<PageId>>();
           return MaterialApp(
             title: 'Animal Cross-reference',
             theme: ThemeData(
@@ -171,36 +166,11 @@ class App extends StatelessWidget {
               pageTransitionsTheme: pageTransitionsTheme,
               platform: defaultTargetPlatform,
             ),
-            builder: (context, child) {
-              final title = pageId.value == PageId.settings
-                  ? 'Settings'
-                  : 'Animal Cross-reference';
-              final color = pageId.value == PageId.settings
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).canvasColor;
-              return Title(
-                title: title,
-                color: color,
-                child: child,
-              );
+            initialRoute: '/',
+            routes: {
+              '/': (_) => HomePage(),
+              '/settings': (_) => SettingsPage(),
             },
-            home: Navigator(
-              pages: [
-                MaterialPage(
-                  key: ValueKey(PageId.home),
-                  child: HomePage(),
-                ),
-                if (pageId.value == PageId.settings)
-                  MaterialPage(
-                    key: ValueKey(PageId.settings),
-                    child: SettingsPage(),
-                  ),
-              ],
-              onPopPage: (route, result) {
-                pageId.value = PageId.home;
-                return route.didPop(result);
-              },
-            ),
           );
         },
       ),
