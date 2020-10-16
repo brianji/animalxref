@@ -1,0 +1,1 @@
+enum PageId { home, settings }
