@@ -61,6 +61,7 @@ class _SearchBarState extends State<SearchBar> {
               icon: Icon(Icons.settings),
               onPressed: () => Navigator.of(context).pushNamed('/settings'),
             ),
+            SizedBox(width: 4),
           ],
         ),
       ),
