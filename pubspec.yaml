@@ -1,7 +1,7 @@
 name: animalxref
 description: An Animal Crossing New Horizons fish reference web application built with Flutter Web.
 
-version: 1.16.3
+version: 1.16.4
 
 environment:
   sdk: ">=2.7.2 <3.0.0"
@@ -13,8 +13,8 @@ dependencies:
   backup: 
     path: backup
   intl: ^0.16.1
-  provider: ^4.3.2+2
-  shared_preferences: ^0.5.12
+  provider: ^4.3.2+3
+  shared_preferences: ^0.5.12+4
 
 flutter:
   uses-material-design: true
