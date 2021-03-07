@@ -49,31 +49,39 @@ class _ChipsState extends State<Chips> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: ChangeNotifierProvider(
-        create: (_) => ScrollController(),
-        builder: (context, _) {
-          final scrollController =
-              context.select<ScrollController, ScrollController>((v) => v);
-          final preferencesNotifier = context.watch<PreferencesNotifier>();
-          final order = List.of(preferencesNotifier.order);
+    final chipTheme = Theme.of(context).chipTheme;
+    return ChipTheme(
+      data: chipTheme.copyWith(pressElevation: 0),
+      child: SizedBox(
+        height: 48,
+        child: ChangeNotifierProvider(
+          create: (_) => ScrollController(),
+          builder: (context, _) {
+            final scrollController =
+                context.select<ScrollController, ScrollController>((v) => v);
+            final preferencesNotifier = context.watch<PreferencesNotifier>();
+            final order = List.of(preferencesNotifier.order);
 
-          return ReorderableListView(
-            scrollController: scrollController,
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 12) + widget.padding,
-            onReorder: (oldIndex, newIndex) {
-              if (oldIndex == order.length) return;
-              newIndex = newIndex.clamp(0, order.length - 1);
-              final removed = order.removeAt(oldIndex);
-              if (newIndex > oldIndex) newIndex--;
-              order.insert(newIndex, removed);
-              preferencesNotifier.order = order;
-            },
-            children: [...order.map((k) => _labelToChip[k]), _ResetButton()],
-          );
-        },
+            return ReorderableListView(
+              scrollController: scrollController,
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 12) + widget.padding,
+              onReorder: (oldIndex, newIndex) {
+                if (oldIndex == order.length) return;
+                newIndex = newIndex.clamp(0, order.length - 1);
+                final removed = order.removeAt(oldIndex);
+                if (newIndex > oldIndex) newIndex--;
+                order.insert(newIndex, removed);
+                preferencesNotifier.order = order;
+              },
+              proxyDecorator: (child, _, animation) => ChipTheme(
+                data: chipTheme.copyWith(elevation: animation.value * 4),
+                child: child,
+              ),
+              children: [...order.map((k) => _labelToChip[k]), _ResetButton()],
+            );
+          },
+        ),
       ),
     );
   }
